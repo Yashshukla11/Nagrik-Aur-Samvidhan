@@ -25,6 +25,7 @@ class MyString {
 
   static const String Quiz = 'Quizes';
   static const String Quizbottom = 'Quiz';
+  static const String CaseStudy = 'CaseStudy';
 
   static const String heading1 = 'Beginner';
   static const String heading2 = 'Intermediate';

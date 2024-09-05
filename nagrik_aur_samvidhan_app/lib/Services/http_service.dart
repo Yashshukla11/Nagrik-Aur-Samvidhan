@@ -61,4 +61,24 @@ class HttpService extends GetxService {
       throw e.message ?? 'An error occurred';
     }
   }
+
+  Future<List<dynamic>> authenticatedRequestGeneral(String path,
+      {String method = 'GET', data}) async {
+    try {
+      final token = await _secureStorage.getToken();
+      final response = await _dio.request(
+        path,
+        options: Options(
+          method: method,
+          headers: {
+            'Authorization': 'Bearer $token',
+          },
+        ),
+        data: data,
+      );
+      return response.data;
+    } on DioError catch (e) {
+      throw e.message ?? 'An error occurred';
+    }
+  }
 }

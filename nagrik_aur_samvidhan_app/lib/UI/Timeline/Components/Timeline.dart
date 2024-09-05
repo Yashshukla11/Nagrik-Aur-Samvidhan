@@ -1,133 +1,224 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import '../../../Elements/Widgets/spaces.dart';
+import 'package:nagrik_aur_samvidhan_app/UI/CaseStudiesList/components/CaseStudyComponent.dart';
+import 'package:nagrik_aur_samvidhan_app/UI/QuizzesList/components/QuizComponent.dart';
 import '../../../Values/values.dart';
 import '../Controller/TimelineController.dart';
+import 'package:percent_indicator/percent_indicator.dart';
+import 'dart:math' show pi, sin;
 
 class Timeline extends StatelessWidget {
   final TimelineController controller = Get.put(TimelineController());
 
   @override
   Widget build(BuildContext context) {
-    final String timelineTitle = MyString.Timeline.tr;
-    final String heading1 = MyString.heading1.tr;
-    final String heading2 = MyString.heading2.tr;
-    final String heading3 = MyString.heading3.tr;
-    final String heading4 = MyString.heading4.tr;
-    final String heading5 = MyString.heading5.tr;
-
-    final Map<String, String> subheadings = {
-      heading1: MyString.sub1.tr,
-      heading2: MyString.sub2.tr,
-      heading3: MyString.sub3.tr,
-      heading4: MyString.sub4.tr,
-      heading5: MyString.sub5.tr,
-    };
-
     return Scaffold(
       appBar: AppBar(
-        automaticallyImplyLeading: false,
-        leading: Padding(
-          padding: const EdgeInsets.all(16.0),
-          child: GestureDetector(
-            onTap: () {
-              Get.back();
-            },
-            child: Image.asset('assets/ChatBot/arrow.png'),
-          ),
-        ),
-        title: Text(
-          timelineTitle,
-          style: TextStyle(
-            color: Colors.black,
-            fontWeight: FontWeight.bold,
-          ),
-        ),
+        title: Text('Timeline'),
         centerTitle: true,
-        backgroundColor: Colors.transparent,
-        elevation: 0,
       ),
       body: Obx(() {
-        return ListView.builder(
-          itemCount: controller.levels.length,
-          itemBuilder: (context, index) {
-            var level = controller.levels[index];
-
-            // Assign a background color based on the index
-            Color backgroundColor;
-            switch (index % 5) {
-              case 0:
-                backgroundColor = Colors.blueAccent;
-                break;
-              case 1:
-                backgroundColor = Colors.greenAccent;
-                break;
-              case 2:
-                backgroundColor = Colors.orangeAccent;
-                break;
-              case 3:
-                backgroundColor = Colors.purpleAccent;
-                break;
-              case 4:
-                backgroundColor = Colors.redAccent;
-                break;
-              default:
-                backgroundColor = Colors.grey;
-                break;
-            }
-
-            // Retrieve the subheading from the map
-            String subheading = subheadings[level['name']] ?? "";
-
-            return Container(
-              margin: const EdgeInsets.all(8.0),
-              padding: const EdgeInsets.all(16.0),
-              decoration: BoxDecoration(
-                color: backgroundColor,
-                borderRadius: BorderRadius.circular(12),
-                boxShadow: [
-                  BoxShadow(
-                    color: Colors.black.withOpacity(0.1),
-                    blurRadius: 6.0,
-                    offset: Offset(0, 2),
-                  ),
-                ],
-              ),
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  Text(
-                    level['name']!,
-                    style: TextStyle(
-                      fontSize: 18,
-                      fontWeight: FontWeight.bold,
-                      color: Colors.white,
-                    ),
-                  ),
-                  SizedBox(height: 8),
-                  Text(
-                    subheading,
-                    style: TextStyle(
-                      fontSize: 14,
-                      color: Colors.white70,
-                    ),
-                  ),
-                  SizedBox(height: 8),
-                  Align(
-                    alignment: Alignment.centerRight,
-                    child: Icon(
-                      controller.isLevelUnlocked(index)
-                          ? Icons.lock_open
-                          : Icons.lock,
-                      color: Colors.white,
-                    ),
-                  ),
-                ],
-              ),
-            );
-          },
-        );
+        if (controller.isLoading.value) {
+          return Center(child: CircularProgressIndicator());
+        } else {
+          return ListView(
+            children: _buildFilteredLevelCards(),
+          );
+        }
       }),
     );
   }
+
+  List<Widget> _buildFilteredLevelCards() {
+    List<String> levels = ['Prarambhik', 'Madhyam', 'Maharathi'];
+    RxString type = controller.getType();
+
+    // Filter levels based on the type
+    List<String> filteredLevels = levels.where((level) {
+      if (type == 'Quiz') {
+        return controller.getTotalQuizCount(level) > 0;
+      } else if (type == 'CaseStudy') {
+        return controller.getTotalCaseStudyCount(level) > 0;
+      }
+      return false;
+    }).toList();
+
+    return levels
+        .map((level) => _buildLevelCard(level, _getColorForLevel(level), type))
+        .toList();
+  }
+
+  Color _getColorForLevel(String level) {
+    switch (level) {
+      case 'Prarambhik':
+        return Colors.orange;
+      case 'Madhyam':
+        return Colors.white;
+      case 'Maharathi':
+        return Colors.green;
+      default:
+        return Colors.grey;
+    }
+  }
+
+  Widget _buildLevelCard(String level, Color color, RxString type) {
+    final isLocked = controller.isLevelLocked(level);
+
+    return GestureDetector(
+      onTap: () {
+        if (isLocked) {
+          _showLockedLevelPopup(level);
+        } else {
+          if (type == 'Quiz') {
+            Get.to(QuizzesComponent(), arguments: {"title": level});
+          } else if (type == 'CaseStudy') {
+            Get.to(CaseStudyComponent(), arguments: {"title": level});
+          }
+        }
+      },
+      child: Card(
+        elevation: 8,
+        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(20)),
+        margin: EdgeInsets.all(16),
+        child: Container(
+          height: Sizes.HEIGHT_220,
+          decoration: BoxDecoration(
+            borderRadius: BorderRadius.circular(20),
+            image: DecorationImage(
+              image: AssetImage(
+                  'assets/Timeline/${controller.getTitle(level)}.jpg'),
+              fit: BoxFit.cover,
+              colorFilter: ColorFilter.mode(
+                color.withOpacity(0.7),
+                BlendMode.srcOver,
+              ),
+            ),
+          ),
+          child: Padding(
+            padding: EdgeInsets.all(20),
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                  children: [
+                    Expanded(
+                      child: Text(
+                        level,
+                        style: TextStyle(
+                          fontSize: 24,
+                          fontWeight: FontWeight.bold,
+                          color:
+                              level == 'Madhyam' ? Colors.blue : Colors.white,
+                        ),
+                      ),
+                    ),
+                    ShakeWidget(
+                      child: Icon(
+                        isLocked ? Icons.lock : Icons.lock_open,
+                        color: level == 'Madhyam' ? Colors.blue : Colors.white,
+                        size: 28,
+                      ),
+                    ),
+                  ],
+                ),
+                Expanded(
+                  child: Center(
+                    child: CircularPercentIndicator(
+                      radius: 60.0,
+                      lineWidth: 10.0,
+                      percent: double.parse(
+                              controller.getCompletionPercentage(level)) /
+                          100,
+                      center: Text(
+                        "${controller.getCompletionPercentage(level)}%",
+                        style: TextStyle(
+                          fontWeight: FontWeight.bold,
+                          fontSize: 20,
+                          color:
+                              level == 'Madhyam' ? Colors.blue : Colors.white,
+                        ),
+                      ),
+                      progressColor:
+                          level == 'Madhyam' ? Colors.blue : Colors.white,
+                      backgroundColor: level == 'Madhyam'
+                          ? Colors.blue.withOpacity(0.2)
+                          : Colors.white.withOpacity(0.2),
+                      circularStrokeCap: CircularStrokeCap.round,
+                      animation: true,
+                      animationDuration: 1000,
+                    ),
+                  ),
+                ),
+                Container(
+                  padding: EdgeInsets.all(6),
+                  // width: Sizes.WIDTH_400,
+                  child: Center(
+                    child: Text(
+                      isLocked ? 'Locked' : 'Tap to start',
+                      style: TextStyle(
+                        fontSize: 16,
+                        color: level == 'Madhyam' ? Colors.blue : Colors.white,
+                        fontStyle: FontStyle.italic,
+                      ),
+                      textAlign: TextAlign.center,
+                    ),
+                  ),
+                ),
+              ],
+            ),
+          ),
+        ),
+      ),
+    );
+  }
+}
+
+class ShakeWidget extends StatelessWidget {
+  final Widget child;
+  final Duration duration;
+  final double shakeOffset;
+  final Curve curve;
+
+  const ShakeWidget({
+    Key? key,
+    required this.child,
+    this.duration = const Duration(milliseconds: 500),
+    this.shakeOffset = 5.0,
+    this.curve = Curves.easeInOut,
+  }) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return TweenAnimationBuilder<double>(
+      tween: Tween(begin: 0.0, end: 1.0),
+      duration: duration,
+      curve: curve,
+      builder: (context, value, child) {
+        return Transform.translate(
+          offset: Offset(
+            sin(value * pi * 4) * shakeOffset,
+            0,
+          ),
+          child: child,
+        );
+      },
+      child: child,
+    );
+  }
+}
+
+void _showLockedLevelPopup(String level) {
+  Get.dialog(
+    AlertDialog(
+      title: Text('Level Locked'),
+      content: Text('Please complete the previous levels to unlock $level.'),
+      actions: [
+        TextButton(
+          child: Text('OK'),
+          onPressed: () => Get.back(),
+        ),
+      ],
+    ),
+  );
 }

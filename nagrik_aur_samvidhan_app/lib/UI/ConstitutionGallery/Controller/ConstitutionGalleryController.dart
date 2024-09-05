@@ -1,30 +1,21 @@
-import 'dart:ui';
-import 'package:get/get.dart';
+//myapp
 
-class ConstitutionGalleryController extends GetxController {
-  static const int _gridSize = 3;
-  final _index = ((_gridSize * _gridSize) ~/ 2).obs;
-  final _lastSwipeDir = Offset.zero.obs;
+import 'package:flutter/foundation.dart';
 
-  int get index => _index.value;
+class ConstitutionGalleryController {
+  // Use ValueNotifier to notify changes if needed
+  static ValueNotifier<List<String>> pagesNotifier =
+      ValueNotifier(_getConstitutionPages());
 
-  Offset get lastSwipeDir => _lastSwipeDir.value;
-
-  void setIndex(int value) {
-    if (value < 0 || value >= _gridSize * _gridSize) return;
-    _index.value = value;
+  static List<String> getConstitutionPages() {
+    return _getConstitutionPages();
   }
 
-  void handleSwipe(Offset dir) {
-    int newIndex = _index.value;
-    if (dir.dy != 0) newIndex += _gridSize * (dir.dy > 0 ? -1 : 1);
-    if (dir.dx != 0) newIndex += (dir.dx > 0 ? -1 : 1);
-
-    if (newIndex < 0 || newIndex >= _gridSize * _gridSize) return;
-    if (dir.dx < 0 && newIndex % _gridSize == 0) return;
-    if (dir.dx > 0 && newIndex % _gridSize == _gridSize - 1) return;
-
-    _lastSwipeDir.value = dir;
-    setIndex(newIndex);
+  // List of image assets (modify with actual paths)
+  static List<String> _getConstitutionPages() {
+    return List.generate(
+      25, // Create a grid of 5x5 images (adjust size as needed)
+      (index) => 'assets/ChatBot/backfinal.jpg',
+    );
   }
 }

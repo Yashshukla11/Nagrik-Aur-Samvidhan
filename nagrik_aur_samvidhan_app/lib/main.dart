@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:nagrik_aur_samvidhan_app/UI/Auth/Components/Login.dart';
 import 'package:nagrik_aur_samvidhan_app/UI/Auth/Components/Signup.dart';
+import 'package:nagrik_aur_samvidhan_app/UI/QuizzesList/components/QuizComponent.dart';
 import 'Constants/Utils/main_container.dart';
 import 'Localization/Translation/localization_service.dart';
 import 'Localization/Translation/translations.dart';
@@ -39,7 +40,9 @@ class MyApp extends StatelessWidget {
         GetPage(name: '/splash', page: () => SplashScreen()),
         GetPage(name: '/home', page: () => MainContainer()),
         GetPage(name: '/login', page: () => LoginScreen()),
-        GetPage(name: '/signup', page: () => SignupScreen())
+        GetPage(name: '/signup', page: () => SignupScreen()),
+        GetPage(name: '/signup', page: () => SignupScreen()),
+        GetPage(name: '/main_quizzes', page: () => (QuizzesComponent())),
       ],
       translations: AppTranslation(),
       locale: Get.find<LocalizationService>().locale,
