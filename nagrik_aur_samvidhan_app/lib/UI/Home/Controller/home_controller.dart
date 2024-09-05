@@ -2,6 +2,7 @@ import 'package:get/get.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get_rx/get_rx.dart';
 import 'package:get/get_rx/src/rx_types/rx_types.dart';
+import 'package:nagrik_aur_samvidhan_app/UI/ConstitutionGallery/Components/ConstitutionGallery.dart';
 
 import '../../../Values/values.dart';
 
@@ -70,7 +71,7 @@ class HomeController extends GetxController {
   }
 
   void onConstitutionTap() {
-    print('Navigate to Constitution');
+    Get.to(ConstitutionGallery());
   }
 
   Future<void> fetchNews() async {
