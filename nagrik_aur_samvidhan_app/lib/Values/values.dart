@@ -3,6 +3,7 @@ library values;
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:nagrik_aur_samvidhan_app/UI/DailyQuiz/Components/daily_quiz.dart';
 
 // import 'assets.gen.dart';
 import 'fonts.gen.dart';

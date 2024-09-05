@@ -18,7 +18,7 @@ class DailyQuizTile extends StatelessWidget {
             decoration: BoxDecoration(
               color: Colors.white,
               borderRadius: BorderRadius.circular(8),
-              boxShadow: const [
+              boxShadow: [
                 BoxShadow(
                   color: Colors.black12,
                   blurRadius: 4,
@@ -35,12 +35,16 @@ class DailyQuizTile extends StatelessWidget {
                 Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    const Text(
-                      MyString.DailyQuiz,
-                      style: TextStyle(
-                          fontSize: 22,
-                          fontWeight: FontWeight.w700,
-                          color: MyColor.black),
+                    Container(
+                      width: Sizes.WIDTH_200,
+                      height: Sizes.HEIGHT_75,
+                      child: Text(
+                        MyString.DailyQuiz.tr,
+                        style: TextStyle(
+                            fontSize: 22,
+                            fontWeight: FontWeight.w700,
+                            color: MyColor.black),
+                      ),
                     ),
                     SizedBox(height: 46),
                     Text(

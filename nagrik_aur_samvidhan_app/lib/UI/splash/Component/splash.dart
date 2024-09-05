@@ -2,8 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:get/get.dart';
-
 import '../../../Values/values.dart';
+import '../../../Constants/app_controller.dart';
 
 class SplashScreen extends StatefulWidget {
   const SplashScreen({Key? key}) : super(key: key);
@@ -44,13 +44,17 @@ class _SplashScreenState extends State<SplashScreen>
     Future.delayed(Duration.zero, () {
       if (mounted) {
         _animationController.forward().then((_) {
-          // After the animation completes, wait for 2000ms and then navigate to the home screen
+          // After the animation completes, wait for 1000ms and then navigate
           Future.delayed(const Duration(milliseconds: 1000), () {
-            Get.offNamed('/home');
+            _navigateToNextScreen();
           });
         });
       }
     });
+  }
+
+  _navigateToNextScreen() async {
+    Get.find<AppController>().checkAuthAndRedirect();
   }
 
   @override

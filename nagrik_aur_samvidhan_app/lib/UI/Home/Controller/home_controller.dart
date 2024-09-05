@@ -1,5 +1,7 @@
 import 'package:get/get.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get_rx/get_rx.dart';
+import 'package:get/get_rx/src/rx_types/rx_types.dart';
 
 import '../../../Values/values.dart';
 
@@ -24,11 +26,13 @@ class HomeController extends GetxController {
   ];
 
   // Quiz-related properties
-  final currentQuestion = 'What is the capital of France?'.obs;
-  final currentAnswers = ['London', 'Berlin', 'Paris', 'Madrid'].obs;
-  final correctAnswer = 'Paris';
+  final currentQuestion = ''.obs;
+  final currentAnswers = [].obs;
+  final correctAnswer = '';
   final quizResult = ''.obs;
-  final quizSubtitle = MyString.hometext.obs;
+  RxString quizSubtitle = MyString.hometext.tr.obs;
+  RxString constitutionSubstring = MyString.explor.tr.obs;
+
   final RxList<NewsItem> newsItems = <NewsItem>[].obs;
   final RxBool isLoading = false.obs;
 
@@ -65,13 +69,16 @@ class HomeController extends GetxController {
     print('Navigate to daily quiz');
   }
 
+  void onConstitutionTap() {
+    print('Navigate to Constitution');
+  }
+
   Future<void> fetchNews() async {
     try {
       isLoading.value = true;
       // Simulating API call delay
       await Future.delayed(Duration(seconds: 2));
 
-      // TODO: Replace this with actual API call
       newsItems.value = [
         NewsItem(
           title: 'Sample News 1',

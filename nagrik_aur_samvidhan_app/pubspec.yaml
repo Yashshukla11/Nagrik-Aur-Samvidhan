@@ -42,6 +42,10 @@ dependencies:
   shared_preferences: ^2.2.3
   url_launcher: ^6.3.0
   google_fonts: ^6.2.1
+  cached_network_image: ^3.4.0
+  flutter_secure_storage: ^9.2.2
+  package_info_plus: ^8.0.2
+  dio: ^5.7.0
 
 dev_dependencies:
   flutter_test:
@@ -71,6 +75,9 @@ flutter:
     - assets/home/
     - assets/auth/
     - assets/bottom_nav/
+    - assets/Quiz/
+    - assets/ChatBot/
+    - assets/profile/
     #   - images/a_dot_ham.jpeg
 
   # An image asset can refer to one or more resolution-specific "variants", see

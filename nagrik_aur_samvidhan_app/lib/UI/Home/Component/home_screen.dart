@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:nagrik_aur_samvidhan_app/UI/Home/Component/widget/carousel.dart';
+import 'package:nagrik_aur_samvidhan_app/UI/Home/Component/widget/constitution.dart';
 import 'package:nagrik_aur_samvidhan_app/UI/Home/Component/widget/daily_quiz.dart';
 import 'package:nagrik_aur_samvidhan_app/UI/Home/Component/widget/news.dart';
 import '../Controller/home_controller.dart';
@@ -18,7 +19,7 @@ class HomeScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text(MyString.home),
+        title: Text(MyString.home.tr),
       ),
       body: SingleChildScrollView(
         child: Column(
@@ -27,6 +28,8 @@ class HomeScreen extends StatelessWidget {
               height: MediaQuery.of(context).size.height * 0.2,
               child: CarouselWidget(logic: _logic),
             ),
+            SizedBox(height: 20),
+            Constitution(logic: _logic),
             SizedBox(height: 20),
             DailyQuizTile(logic: _logic),
             SizedBox(height: 20),

@@ -44,10 +44,14 @@ class BottomNav extends StatelessWidget {
               unselectedItemColor: Colors.white,
               enableFeedback: false,
               items: [
-                _buildNavItem('assets/bottom_nav/home.png', 'Home', 0),
-                _buildNavItem('assets/bottom_nav/quiz1.png', 'Quiz', 1),
-                _buildNavItem('assets/bottom_nav/chat.png', 'Chatbot', 2),
-                _buildNavItem('assets/bottom_nav/kid.png', 'Profile', 3),
+                _buildNavItem(
+                    'assets/bottom_nav/home.png', MyString.home.tr, 0),
+                _buildNavItem(
+                    'assets/bottom_nav/quiz1.png', MyString.Quiz.tr, 1),
+                _buildNavItem(
+                    'assets/bottom_nav/chat.png', MyString.chatBot.tr, 2),
+                _buildNavItem(
+                    'assets/bottom_nav/kid.png', MyString.Profile.tr, 3),
               ],
             ),
           ),

@@ -22,7 +22,7 @@ class MainContainer extends StatelessWidget {
           case 1:
             return QuizScreen();
           case 2:
-            return ChatBot();
+            return Chatbot();
           case 3:
             return ProfileScreen();
           default:
