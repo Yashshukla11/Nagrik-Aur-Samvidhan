@@ -39,15 +39,19 @@ class ChatbotScreenController extends GetxController {
       if (response.statusCode == 200) {
         final jsonResponse = json.decode(response.body);
         String answer = jsonResponse['answer'];
-        messages.add("${MyString.response.tr}: $answer");
+        messages.add('answer: $answer');
       } else {
-        messages.add("${MyString.response.tr}: Sorry, I couldn't process your request. Please try again.");
+        messages.add("answer: Sorry, I couldn't process your request. Please try again.");
       }
     } catch (e) {
-      messages.add("${MyString.response.tr}: An error occurred. Please try again later.");
+      messages.add("answer: An error occurred. Please try again later.");
       print("Error: $e");
     } finally {
       isLoading.value = false;
     }
+  }
+
+  Future<void> clearMessages() async {
+    messages.clear();
   }
 }

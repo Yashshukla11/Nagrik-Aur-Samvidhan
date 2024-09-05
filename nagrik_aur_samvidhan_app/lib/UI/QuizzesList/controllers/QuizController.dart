@@ -1,9 +1,6 @@
 import 'package:get/get.dart';
-import 'package:http/http.dart' as http;
-import 'package:nagrik_aur_samvidhan_app/Constants/Constants.dart';
-import 'dart:convert';
+import '../../../Constants/Constants.dart';
 import '../../../Services/http_service.dart';
-
 import 'package:nagrik_aur_samvidhan_app/Constants/Utils/app_urls.dart';
 
 class Quiz {
@@ -54,13 +51,6 @@ class QuizzesController extends GetxController {
 
   String title = "";
 
-  // @override
-  // void onInit() {
-  //   super.onInit();
-  //   getArguments();
-  //   fetchQuizzes();
-  // }
-
   @override
   void onReady() {
     getArguments();
@@ -75,16 +65,14 @@ class QuizzesController extends GetxController {
 
   void fetchQuizzes() async {
     isLoading(true);
-    final response =
-        await _httpService.authenticatedRequestGeneral('/map/$title');
-    Debug.setLog('Quizzes response: $response');
-
     try {
-      // Assuming the quizzes are stored directly in the response list
+      final response =
+      await _httpService.authenticatedRequestGeneral('/map/$title');
+      Debug.setLog('---------------Quizzes response: $response');
       quizzes.value =
-          response.map((quizJson) => Quiz.fromJson(quizJson)).toList();
+          response.map<Quiz>((quizJson) => Quiz.fromJson(quizJson)).toList();
     } catch (e) {
-      print('Error fetching quizzes: $e');
+      print('-----------------Error fetching quizzes: $e');
       Get.snackbar('Error', 'An error occurred: $e');
     } finally {
       isLoading(false);

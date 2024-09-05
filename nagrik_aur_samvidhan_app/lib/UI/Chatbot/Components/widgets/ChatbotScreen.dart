@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:cached_network_image/cached_network_image.dart';
+import 'package:flutter_markdown/flutter_markdown.dart';
 import 'package:nagrik_aur_samvidhan_app/Elements/Widgets/spaces.dart';
 import '../../../../Values/values.dart';
 import '../../Controller/chatbotScreenController.dart';
@@ -9,12 +9,15 @@ import '../../Controller/chatbotScreenController.dart';
 class Chatbot_Screen extends StatelessWidget {
   final ChatbotScreenController _controller = Get.put(ChatbotScreenController());
 
+  // ScrollController to handle auto-scroll
+  final ScrollController _scrollController = ScrollController();
+
   Chatbot_Screen({super.key});
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Colors.white,
+      backgroundColor: const Color(0xFFF5F5DC), // Off-white or parchment color
       appBar: AppBar(
         automaticallyImplyLeading: false,
         leading: Padding(
@@ -23,14 +26,22 @@ class Chatbot_Screen extends StatelessWidget {
             onTap: () {
               Get.back();
             },
-            child: Image.asset('assets/ChatBot/arrow.png'),
+            child: const Icon(
+              Icons.arrow_back_ios_new,
+              color: Colors.black,
+            ),
           ),
         ),
-        title: Text('',
-            style: TextStyle(
-              color: Colors.black,
-              fontWeight: FontWeight.bold,
-            )),
+        title: Text(
+          _controller.type == 'ConstitutionalBot'
+              ? "Constitutional Bot"
+              : "Educational Bot",
+          style: GoogleFonts.merriweather(
+            color: Colors.black,
+            fontWeight: FontWeight.bold,
+            fontSize: 18, // Increased font size for title
+          ),
+        ),
         centerTitle: true,
         backgroundColor: Colors.transparent,
         elevation: 0,
@@ -38,28 +49,41 @@ class Chatbot_Screen extends StatelessWidget {
           Padding(
             padding: const EdgeInsets.only(right: 16.0),
             child: Container(
-              padding: EdgeInsets.all(8),
+              padding: const EdgeInsets.all(8),
               width: Sizes.WIDTH_120,
               decoration: BoxDecoration(
-                color: MyColor.black,
+                color: MyColor.red,
                 border: Border.all(
                   color: Colors.black,
                   width: 1.0,
                 ),
                 borderRadius: BorderRadius.circular(8.0),
               ),
-              child: Row(
-                children: [
-                  Text(
-                    MyString.newChat.tr,
-                    style: TextStyle(color: MyColor.white),
-                  ),
-                  SpaceW4(),
-                  Icon(
-                    Icons.add,
-                    color: MyColor.white,
-                  ),
-                ],
+              child: GestureDetector(
+                onTap: () {
+                  _controller.clearMessages();
+                  Get.snackbar(
+                    'New Chat',
+                    _controller.type.value == 'ConstitutionalBot'
+                        ? "Ready to help you on legal matters"
+                        : "Ready to help you on general/educational matters",
+                    snackPosition: SnackPosition.TOP,
+                    backgroundColor: Colors.black,
+                    colorText: Colors.white,
+                    animationDuration: const Duration(milliseconds: 500),
+                    duration: const Duration(seconds: 1),
+                  );
+                },
+                child: Row(
+                  children: [
+                    Icon(Icons.gavel, color: MyColor.white),
+                    SpaceW4(),
+                    Text(
+                      MyString.newChat.tr,
+                      style: const TextStyle(color: MyColor.white),
+                    ),
+                  ],
+                ),
               ),
             ),
           ),
@@ -68,20 +92,36 @@ class Chatbot_Screen extends StatelessWidget {
       body: Column(
         children: [
           Expanded(
-            child: Obx(() => ListView.builder(
-              padding: EdgeInsets.all(10),
-              itemCount: _controller.messages.length,
-              itemBuilder: (context, index) {
-                return _buildMessageItem(_controller.messages[index]);
+            child: Obx(
+                  () {
+                // Auto-scroll when messages change
+                WidgetsBinding.instance.addPostFrameCallback((_) {
+                  if (_scrollController.hasClients) {
+                    _scrollController.animateTo(
+                      _scrollController.position.maxScrollExtent,
+                      duration: const Duration(milliseconds: 300),
+                      curve: Curves.easeOut,
+                    );
+                  }
+                });
+
+                return ListView.builder(
+                  controller: _scrollController,
+                  padding: const EdgeInsets.all(10),
+                  itemCount: _controller.messages.length,
+                  itemBuilder: (context, index) {
+                    return _buildMessageItem(_controller.messages[index]);
+                  },
+                );
               },
-            )),
+            ),
           ),
           Obx(() => _controller.isLoading.value
               ? const Padding(
             padding: EdgeInsets.all(8.0),
             child: CircularProgressIndicator(),
           )
-              : SizedBox.shrink()),
+              : const SizedBox.shrink()),
           Padding(
             padding: const EdgeInsets.all(16.0),
             child: _buildMessageInput(),
@@ -92,23 +132,33 @@ class Chatbot_Screen extends StatelessWidget {
   }
 
   Widget _buildMessageItem(String message) {
+    bool isResponse = message.startsWith("answer: ");
     return Align(
-      alignment: message.startsWith(MyString.response.tr)
-          ? Alignment.centerLeft
-          : Alignment.centerRight,
+      alignment: isResponse ? Alignment.centerLeft : Alignment.centerRight,
       child: Container(
-        margin: EdgeInsets.symmetric(vertical: 5),
-        padding: EdgeInsets.all(12),
+        margin: const EdgeInsets.symmetric(vertical: 5),
+        padding: const EdgeInsets.all(12),
         decoration: BoxDecoration(
-          color: message.startsWith(MyString.response.tr)
-              ? Color(0xFF00712D).withOpacity(0.4)
-              : Color(0xFFFF9100).withOpacity(0.4),
-          borderRadius: BorderRadius.circular(8),
+          color: isResponse
+              ? const Color(0xFF9BC57E).withOpacity(0.9) // Light green for bot messages
+              : const Color(0xFFFFF9C4).withOpacity(0.9), // Light yellow for user messages
+          borderRadius: BorderRadius.only(
+            topLeft: const Radius.circular(8),
+            topRight: const Radius.circular(8),
+            bottomLeft: isResponse ? const Radius.circular(0) : const Radius.circular(8),
+            bottomRight: isResponse ? const Radius.circular(8) : const Radius.circular(0),
+          ),
         ),
-        child: Text(
-          message,
-          style: TextStyle(
-              color: Colors.black, fontSize: 16, fontWeight: FontWeight.w600),
+        child: MarkdownBody(
+          data: message.replaceAll("answer: ", ""),  // Markdown content with line breaks
+          styleSheet: MarkdownStyleSheet(
+            p: GoogleFonts.libreBaskerville(
+              fontSize: 16,
+              color: Colors.black,
+              fontWeight: FontWeight.w600,
+            ),
+          ),
+          softLineBreak: true, // Allows line breaks for '\n'
         ),
       ),
     );
@@ -117,12 +167,19 @@ class Chatbot_Screen extends StatelessWidget {
   Widget _buildMessageInput() {
     TextEditingController _textController = TextEditingController();
     return Container(
-      padding: EdgeInsets.all(8),
-      height: Sizes.HEIGHT_60,
+      padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 8),
       decoration: BoxDecoration(
         border: Border.all(color: Colors.black, width: 1.0),
         borderRadius: BorderRadius.circular(30),
         color: Colors.white,
+        boxShadow: [
+          BoxShadow(
+            color: Colors.grey.withOpacity(0.3),
+            spreadRadius: 3,
+            blurRadius: 5,
+            offset: const Offset(0, 3), // Shadow for depth
+          ),
+        ],
       ),
       child: Row(
         children: [
@@ -133,17 +190,19 @@ class Chatbot_Screen extends StatelessWidget {
                 controller: _textController,
                 maxLines: null,
                 cursorColor: Colors.black,
-                style: TextStyle(fontSize: 16, color: Colors.black),
+                style: GoogleFonts.libreBaskerville(
+                  fontSize: 16,
+                  color: Colors.black,
+                ),
                 decoration: InputDecoration(
-                  labelStyle: TextStyle(color: Colors.black),
-                  hoverColor: Colors.grey,
+                  labelStyle: const TextStyle(color: Colors.black),
                   hintText: MyString.message.tr,
                   border: InputBorder.none,
-                  hintStyle: TextStyle(color: Colors.black),
-                  alignLabelWithHint: true,
-                  contentPadding: EdgeInsets.symmetric(vertical: 14.0),
+                  hintStyle: GoogleFonts.libreBaskerville(
+                    color: Colors.black54,
+                  ),
+                  contentPadding: const EdgeInsets.symmetric(vertical: 12.0),
                 ),
-                textAlign: TextAlign.justify,
               ),
             ),
           ),
@@ -156,14 +215,12 @@ class Chatbot_Screen extends StatelessWidget {
             },
             child: Padding(
               padding: const EdgeInsets.all(8.0),
-              child: Image.asset(
-                'assets/ChatBot/right.png',
-                height: 30,
-                width: 30,
+              child: const Icon(
+                Icons.send,
                 color: Colors.black,
               ),
             ),
-          )
+          ),
         ],
       ),
     );

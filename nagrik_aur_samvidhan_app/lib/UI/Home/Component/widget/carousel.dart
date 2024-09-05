@@ -35,7 +35,17 @@ class CarouselWidget extends StatelessWidget {
               ),
             );
           },
-          child: CarouselItem(logic: logic, index: adjustedIndex),
+          child: GestureDetector(
+            onTap: () {
+              Navigator.push(
+                context,
+                MaterialPageRoute(
+                  builder: (context) => DetailScreen(index: adjustedIndex),
+                ),
+              );
+            },
+            child: CarouselItem(logic: logic, index: adjustedIndex),
+          ),
         );
       },
     );
@@ -68,6 +78,27 @@ class CarouselItem extends StatelessWidget {
               fontWeight: FontWeight.bold,
             ),
           ),
+        ),
+      ),
+    );
+  }
+}
+
+class DetailScreen extends StatelessWidget {
+  final int index;
+
+  const DetailScreen({Key? key, required this.index}) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(
+        title: Text('Detail Screen'),
+      ),
+      body: Center(
+        child: Text(
+          'Selected item index: $index',
+          style: TextStyle(fontSize: 24),
         ),
       ),
     );
