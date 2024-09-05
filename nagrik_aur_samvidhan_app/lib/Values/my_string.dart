@@ -47,8 +47,11 @@ class MyString {
 // Quiz Screen strings
   static const String ChatBotheading = 'ChatBot';
 
-  static const String ChatBot = 'Talk About Constitution';
+  static const String ChatBotLegal = 'Talk About Constitution';
   static const String chatBot = 'ChatBot';
+
+  static const String ChatBotEducational = 'Need help';
+
 
   static const String ChatBotsubTitle = 'Let\'s Go...';
 

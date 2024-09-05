@@ -37,7 +37,7 @@ class TimelineController extends GetxController {
   }
 
   Future<void> getArguments() async {
-    type = Get.arguments["type"];
+    type.value = Get.arguments["type"];
     Debug.setLog('type: $type');
   }
 

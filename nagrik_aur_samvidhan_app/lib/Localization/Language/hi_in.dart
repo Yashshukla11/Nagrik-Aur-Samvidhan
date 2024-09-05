@@ -24,7 +24,6 @@ const Map<String, String> hiIn = {
       'विवरण में महारत हासिल करें: सूक्ष्म और गहन विषयों का अन्वेषण करें',
   MyString.sub5: 'उत्कृष्टता प्राप्त करें: सबसे चुनौतीपूर्ण अवधारणाओं को जीतें',
   MyString.ChatBotheading: 'चैटबॉट',
-  MyString.ChatBot: 'संविधान पर बात करें',
   MyString.ChatBotsubTitle: 'चलो चलते हैं...',
   MyString.response: 'प्रतिक्रिया',
   MyString.newChat: 'नई चैट',

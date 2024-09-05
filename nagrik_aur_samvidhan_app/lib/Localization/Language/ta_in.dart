@@ -27,7 +27,6 @@ const Map<String, String> taIn = {
   MyString.sub5:
       'மிகச்சிறந்தவன் ஆகுங்கள்: மிகவும் சவாலான கருத்துக்களை வெல்லுங்கள்',
   MyString.ChatBotheading: 'பேச்சாளன்',
-  MyString.ChatBot: 'அரசியலமைப்பைப் பற்றி பேசுங்கள்',
   MyString.ChatBotsubTitle: 'வாங்க போகலாம்...',
   MyString.response: 'பதில்',
   MyString.newChat: 'புதிய உரையாடல்',

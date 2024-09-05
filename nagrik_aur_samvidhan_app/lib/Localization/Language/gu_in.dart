@@ -23,7 +23,6 @@ const Map<String, String> guIn = {
   MyString.sub4: 'વિગતો પર ધ્યાન આપો: ઊંડાણપૂર્વકના વિષયોની શોધખોળ કરો',
   MyString.sub5: 'શ્રેષ્ઠતા હાંસલ કરો: સૌથી મુશ્કેલ કલ્પનાઓ જીતી લો',
   MyString.ChatBotheading: 'ચેટબોટ',
-  MyString.ChatBot: 'સંવિધાન વિશે વાત કરો',
   MyString.ChatBotsubTitle: 'ચાલો આગળ વધીએ...',
   MyString.response: 'પ્રતિસાદ',
   MyString.newChat: 'નવી ચેટ',

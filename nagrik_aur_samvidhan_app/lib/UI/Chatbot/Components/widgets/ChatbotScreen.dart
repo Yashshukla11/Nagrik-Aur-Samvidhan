@@ -7,8 +7,7 @@ import '../../../../Values/values.dart';
 import '../../Controller/chatbotScreenController.dart';
 
 class Chatbot_Screen extends StatelessWidget {
-  final ChatbotScreenController _controller =
-      Get.put(ChatbotScreenController());
+  final ChatbotScreenController _controller = Get.put(ChatbotScreenController());
 
   Chatbot_Screen({super.key});
 
@@ -70,22 +69,22 @@ class Chatbot_Screen extends StatelessWidget {
         children: [
           Expanded(
             child: Obx(() => ListView.builder(
-                  padding: EdgeInsets.all(10),
-                  itemCount: _controller.messages.length,
-                  itemBuilder: (context, index) {
-                    return _buildMessageItem(_controller.messages[index]);
-                  },
-                )),
+              padding: EdgeInsets.all(10),
+              itemCount: _controller.messages.length,
+              itemBuilder: (context, index) {
+                return _buildMessageItem(_controller.messages[index]);
+              },
+            )),
           ),
           Obx(() => _controller.isLoading.value
               ? const Padding(
-                  padding: EdgeInsets.all(8.0),
-                  child: CircularProgressIndicator(),
-                )
+            padding: EdgeInsets.all(8.0),
+            child: CircularProgressIndicator(),
+          )
               : SizedBox.shrink()),
           Padding(
             padding: const EdgeInsets.all(16.0),
-            child: _buildMessageInput(context),
+            child: _buildMessageInput(),
           ),
         ],
       ),
@@ -115,7 +114,7 @@ class Chatbot_Screen extends StatelessWidget {
     );
   }
 
-  Widget _buildMessageInput(BuildContext context) {
+  Widget _buildMessageInput() {
     TextEditingController _textController = TextEditingController();
     return Container(
       padding: EdgeInsets.all(8),

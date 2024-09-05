@@ -24,7 +24,6 @@ const Map<String, String> bnIn = {
   MyString.sub4: 'বিশদে দক্ষ হন: সূক্ষ্ম এবং গভীর বিষয়গুলি অন্বেষণ করুন',
   MyString.sub5: 'সেরা হোন: সবচেয়ে চ্যালেঞ্জিং ধারণাগুলি জয় করুন',
   MyString.ChatBotheading: 'চ্যাটবট',
-  MyString.ChatBot: 'সংবিধান সম্পর্কে কথা বলুন',
   MyString.ChatBotsubTitle: 'চল যাই...',
   MyString.response: 'প্রতিক্রিয়া',
   MyString.newChat: 'নতুন চ্যাট',

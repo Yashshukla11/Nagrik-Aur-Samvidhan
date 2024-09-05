@@ -1,20 +1,23 @@
 import 'package:get/get.dart';
 import 'package:flutter/material.dart';
-import 'package:get/get_rx/get_rx.dart';
 import 'package:nagrik_aur_samvidhan_app/UI/Chatbot/Components/widgets/ChatbotScreen.dart';
-
-import '../../../Routing/routes.dart';
 import '../../../Values/values.dart';
-import 'chatbotScreenController.dart';
 
 class ChatbotController extends GetxController {
   late PageController pageController;
   RxString ChatBotsubTitle = MyString.ChatBotsubTitle.tr.obs;
 
-  Future<void> onChatbotTap() async {
+  Future<void> onChatbotTapConstitutionalBot() async {
     Get.to(
-      Chatbot_Screen(),
-      arguments: [],
+          () => Chatbot_Screen(),
+      arguments: {"type": "ConstitutionalBot"},
+    );
+  }
+
+  Future<void> onChatbotTapGeneralBot() async {
+    Get.to(
+          () => Chatbot_Screen(),
+      arguments: {"type": "GeneralBot"},
     );
   }
 }

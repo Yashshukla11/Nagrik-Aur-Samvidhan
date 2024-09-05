@@ -30,7 +30,7 @@ class CarouselWidget extends StatelessWidget {
             return Center(
               child: SizedBox(
                 height: Curves.easeOut.transform(value) * 300,
-                width: Curves.easeOut.transform(value) * 300,
+                width: Curves.easeOut.transform(value) * 500,
                 child: child,
               ),
             );

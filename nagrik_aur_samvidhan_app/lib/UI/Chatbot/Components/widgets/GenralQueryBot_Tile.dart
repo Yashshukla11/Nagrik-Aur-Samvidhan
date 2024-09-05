@@ -12,7 +12,7 @@ class GenralQueryBot extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Obx(() => GestureDetector(
-          onTap: logic.onChatbotTap,
+          onTap: logic.onChatbotTapGeneralBot,
           child: Container(
             padding: EdgeInsets.all(16),
             margin: EdgeInsets.symmetric(horizontal: 16, vertical: 8),
@@ -40,7 +40,7 @@ class GenralQueryBot extends StatelessWidget {
                       width: Sizes.WIDTH_250,
                       height: Sizes.HEIGHT_75,
                       child: Text(
-                        MyString.ChatBot.tr,
+                        MyString.ChatBotEducational.tr,
                         style: TextStyle(
                             fontSize: 22,
                             fontWeight: FontWeight.w300,

@@ -26,7 +26,6 @@ const Map<String, String> knIn = {
   MyString.sub5:
       'ಅತ್ಯುತ್ತಮತೆಯನ್ನು ಸಾಧಿಸಿ: ಅತ್ಯಂತ ಸವಾಲಿನ ಸಂಜ್ಞConceptsಗಳನ್ನು ಗೆಲ್ಲಿರಿ',
   MyString.ChatBotheading: 'ಚಾಟ್‌ಬಾಟ್',
-  MyString.ChatBot: 'ಸಂವಿಧಾನ ಬಗ್ಗೆ ಚರ್ಚೆ ಮಾಡಿ',
   MyString.ChatBotsubTitle: 'ಮುಂದೆ ಸಾಗೋಣ...',
   MyString.response: 'ಪ್ರತಿಕ್ರಿಯೆ',
   MyString.newChat: 'ಹೊಸ ಚಾಟ್',

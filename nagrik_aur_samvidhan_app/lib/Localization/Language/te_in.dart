@@ -26,7 +26,6 @@ const Map<String, String> teIn = {
       'వివరాల్లో చురుకుగా ఉండండి: నిశితమైన మరియు లోతైన విషయాలను అన్వేషించండి',
   MyString.sub5: 'మంచి నైపుణ్యం పొందండి: చాలా క్లిష్టమైన భావాలను గెలుచుకోండి',
   MyString.ChatBotheading: 'చాట్బాట్',
-  MyString.ChatBot: 'రాజ్యాంగం గురించి మాట్లాడండి',
   MyString.ChatBotsubTitle: 'వెళ్దాం...',
   MyString.response: 'స్పందన',
   MyString.newChat: 'క్రొత్త చాట్',

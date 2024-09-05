@@ -7,6 +7,7 @@ class AppUrls {
       ? 'http://ec2-15-206-145-80.ap-south-1.compute.amazonaws.com:8000'
       : 'http://ec2-15-206-145-80.ap-south-1.compute.amazonaws.com:8000';
   static String apiBaseUrl = '$baseUrl';
+  static String chatBotUrl = 'http://192.168.26.126:8000';
   static String uploadMediaUrl = '$apiBaseUrl/api/';
 
   static String isUserExistUrl(contact) =>
