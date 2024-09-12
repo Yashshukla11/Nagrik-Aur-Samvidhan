@@ -1,8 +1,10 @@
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:nagrik_aur_samvidhan_app/Elements/Widgets/spaces.dart';
-import '../../Controller/chatBotController.dart';
+
 import '../../../../Values/values.dart';
+import '../../Controller/chatBotController.dart';
 
 class ConstitutionQueryBot extends StatelessWidget {
   final ChatbotController logic;
@@ -27,7 +29,8 @@ class ConstitutionQueryBot extends StatelessWidget {
                 ),
               ],
               image: DecorationImage(
-                image: AssetImage('assets/ChatBot/chatbot.jpg'),
+                image: CachedNetworkImageProvider(
+                    'https://i.postimg.cc/RVzW53Jt/chatbot.jpg'),
                 fit: BoxFit.fitWidth,
               ),
             ),

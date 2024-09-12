@@ -1,8 +1,10 @@
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:nagrik_aur_samvidhan_app/Elements/Widgets/spaces.dart';
-import '../../Controller/chatBotController.dart';
+
 import '../../../../Values/values.dart';
+import '../../Controller/chatBotController.dart';
 
 class GenralQueryBot extends StatelessWidget {
   final ChatbotController logic;
@@ -27,8 +29,9 @@ class GenralQueryBot extends StatelessWidget {
                 ),
               ],
               image: DecorationImage(
-                image: AssetImage('assets/ChatBot/chatbot.jpg'),
-                fit: BoxFit.fitWidth,
+                image: CachedNetworkImageProvider(
+                    'https://i.postimg.cc/HsDjbJpx/download-3.png'),
+                fit: BoxFit.cover,
               ),
             ),
             child: Row(
@@ -43,8 +46,8 @@ class GenralQueryBot extends StatelessWidget {
                         MyString.ChatBotEducational.tr,
                         style: TextStyle(
                             fontSize: 22,
-                            fontWeight: FontWeight.w300,
-                            color: MyColor.white),
+                            fontWeight: FontWeight.w600,
+                            color: MyColor.black),
                       ),
                     ),
                     SizedBox(height: 46),
@@ -53,7 +56,7 @@ class GenralQueryBot extends StatelessWidget {
                       children: [
                         Text(
                           logic.ChatBotsubTitle.value,
-                          style: TextStyle(color: MyColor.white),
+                          style: TextStyle(color: MyColor.black),
                         ),
                         SpaceW20(),
                         SizedBox(
@@ -64,7 +67,7 @@ class GenralQueryBot extends StatelessWidget {
                                 AssetImage('assets/ChatBot/chattilelogo.png'),
                             height: Sizes.HEIGHT_30,
                             width: Sizes.WIDTH_30,
-                            color: MyColor.white,
+                            color: MyColor.black,
                           ),
                         )
                       ],
@@ -74,7 +77,7 @@ class GenralQueryBot extends StatelessWidget {
                 Spacer(),
                 Icon(
                   Icons.arrow_forward_ios,
-                  color: MyColor.white,
+                  color: MyColor.black,
                 ),
               ],
             ),

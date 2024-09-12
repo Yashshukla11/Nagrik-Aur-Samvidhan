@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:nagrik_aur_samvidhan_app/Values/values.dart';
+
 import '../Controller/bottom_nav_controller.dart';
 
 class BottomNav extends StatelessWidget {
@@ -49,7 +50,7 @@ class BottomNav extends StatelessWidget {
                 _buildNavItem(
                     'assets/bottom_nav/quiz1.png', MyString.Quiz.tr, 1),
                 _buildNavItem(
-                    'assets/bottom_nav/chat.png', MyString.chatBot.tr, 2),
+                    'assets/bottom_nav/chatbot1.png', MyString.chatBot.tr, 2),
                 _buildNavItem(
                     'assets/bottom_nav/kid.png', MyString.Profile.tr, 3),
               ],

@@ -1,7 +1,10 @@
+import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import '../../../Constants/Constants.dart';
 import '../../../Services/http_service.dart';
 import 'package:nagrik_aur_samvidhan_app/Constants/Utils/app_urls.dart';
+
+import '../../PlayQuiz/components/PlayQuiz.dart';
 
 class Quiz {
   final String id;
@@ -14,6 +17,7 @@ class Quiz {
   final int score;
   final String percentage;
   final String type;
+  final String? description;
 
   Quiz({
     required this.id,
@@ -26,20 +30,22 @@ class Quiz {
     this.score = 0,
     this.percentage = "0",
     required this.type,
+    this.description,
   });
 
   factory Quiz.fromJson(Map<String, dynamic> json) {
     return Quiz(
-      id: json['_id'],
-      title: json['title'],
+      id: json['_id'].toString(),
+      title: json['title'].toString(),
       duration: json['duration'],
       totalQuestions: json['totalQuestions'],
-      difficulty: json['difficulty'],
+      difficulty: json['difficulty'].toString(),
       isPassed: json['isPassed'] ?? false,
       isAttempted: json['isAttempted'] ?? false,
       score: json['score'] ?? 0,
-      percentage: json['percentage'] ?? "0",
-      type: json['type'],
+      percentage: json['percentage']?.toString() ?? "0",
+      type: json['type'].toString(),
+      description: json['description']?.toString(),
     );
   }
 }
@@ -67,15 +73,36 @@ class QuizzesController extends GetxController {
     isLoading(true);
     try {
       final response =
-      await _httpService.authenticatedRequestGeneral('/map/$title');
+          await _httpService.authenticatedRequestGeneral('/map/$title');
       Debug.setLog('---------------Quizzes response: $response');
-      quizzes.value =
-          response.map<Quiz>((quizJson) => Quiz.fromJson(quizJson)).toList();
+      quizzes.value = (response as List)
+          .map<Quiz>((quizJson) => Quiz.fromJson(quizJson))
+          .toList();
     } catch (e) {
       print('-----------------Error fetching quizzes: $e');
       Get.snackbar('Error', 'An error occurred: $e');
     } finally {
       isLoading(false);
+    }
+  }
+
+  void handleQuizTap(Quiz quiz) {
+    if (quiz.isPassed) {
+      Get.dialog(
+        AlertDialog(
+          title: Text('Quiz Already Completed'),
+          content: Text(
+              'You have already passed this quiz. Your score was ${quiz.score}/${quiz.totalQuestions} (${quiz.percentage}%).'),
+          actions: [
+            TextButton(
+              child: Text('OK'),
+              onPressed: () => Get.back(),
+            ),
+          ],
+        ),
+      );
+    } else {
+      Get.to(() => PlayQuiz(), arguments: {'quizId': quiz.id});
     }
   }
 }

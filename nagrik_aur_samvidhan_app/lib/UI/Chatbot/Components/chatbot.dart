@@ -7,8 +7,7 @@ import 'package:nagrik_aur_samvidhan_app/UI/Chatbot/Controller/chatBotController
 import '../../../Values/values.dart';
 
 class Chatbot extends StatelessWidget {
-  Chatbot({Key? key}) : super(key: key) {
-    // Initialize the controller
+  Chatbot({super.key}) {
     _logic = Get.put(ChatbotController());
   }
 
@@ -17,14 +16,40 @@ class Chatbot extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: Text(MyString.ChatBotheading.tr),
-      ),
-      body: SingleChildScrollView(
+      body: Container(
+        decoration: const BoxDecoration(
+          gradient: LinearGradient(
+            colors: [
+              Color(0xFFFFFFFF),
+              Color(0xFFABBAAB),
+            ],
+            begin: Alignment.centerLeft,
+            end: Alignment.centerRight,
+          ),
+        ),
         child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            ConstitutionQueryBot(logic: _logic),
-            GenralQueryBot(logic: _logic),
+            Padding(
+              padding: const EdgeInsets.all(16.0),
+              child: Text(
+                MyString.ChatBotheading.tr,
+                style: const TextStyle(
+                  fontSize: 24,
+                  fontWeight: FontWeight.w600,
+                ),
+              ),
+            ),
+            Expanded(
+              child: SingleChildScrollView(
+                child: Column(
+                  children: [
+                    ConstitutionQueryBot(logic: _logic),
+                    GenralQueryBot(logic: _logic),
+                  ],
+                ),
+              ),
+            ),
           ],
         ),
       ),

@@ -1,7 +1,9 @@
+import 'package:cached_network_image/cached_network_image.dart'; // Import the package
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import '../../Controller/home_controller.dart';
+
 import '../../../../Values/values.dart';
+import '../../Controller/home_controller.dart';
 
 class DailyQuizTile extends StatelessWidget {
   final HomeController logic;
@@ -18,7 +20,7 @@ class DailyQuizTile extends StatelessWidget {
             decoration: BoxDecoration(
               color: Colors.white,
               borderRadius: BorderRadius.circular(8),
-              boxShadow: [
+              boxShadow: const [
                 BoxShadow(
                   color: Colors.black12,
                   blurRadius: 4,
@@ -26,8 +28,11 @@ class DailyQuizTile extends StatelessWidget {
                 ),
               ],
               image: DecorationImage(
-                image: AssetImage('assets/home/test2.jpg'),
-                fit: BoxFit.fitWidth,
+                image: CachedNetworkImageProvider(
+                  'https://i.postimg.cc/HW0RSkc6/download-1.png',
+                ),
+                fit: BoxFit.cover,
+                alignment: Alignment.bottomCenter,
               ),
             ),
             child: Row(
@@ -41,20 +46,25 @@ class DailyQuizTile extends StatelessWidget {
                       child: Text(
                         MyString.DailyQuiz.tr,
                         style: TextStyle(
-                            fontSize: 22,
-                            fontWeight: FontWeight.w700,
-                            color: MyColor.black),
+                          fontSize: 22,
+                          fontWeight: FontWeight.w700,
+                          color: MyColor.white,
+                        ),
                       ),
                     ),
                     SizedBox(height: 46),
                     Text(
                       logic.quizSubtitle.value,
-                      style: TextStyle(color: MyColor.white),
+                      style: TextStyle(
+                          color: MyColor.white, fontWeight: FontWeight.w600),
                     ),
                   ],
                 ),
                 Spacer(),
-                Icon(Icons.arrow_forward_ios),
+                Icon(
+                  Icons.arrow_forward_ios,
+                  color: MyColor.white,
+                ),
               ],
             ),
           ),

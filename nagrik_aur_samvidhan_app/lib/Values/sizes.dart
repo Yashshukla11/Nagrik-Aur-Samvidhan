@@ -137,6 +137,8 @@ class Sizes {
   static double HEIGHT_1 = 1.0.h;
 
   //Widths
+  static double WIDTH_800 = 800.0.w;
+
   static double WIDTH_400 = 400.0.w;
   static double WIDTH_355 = 355.0.w;
   static double WIDTH_350 = 350.0.w;

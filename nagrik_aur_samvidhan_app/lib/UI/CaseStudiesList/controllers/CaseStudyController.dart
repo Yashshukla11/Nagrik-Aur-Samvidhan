@@ -1,10 +1,7 @@
 import 'package:get/get.dart';
-import 'package:http/http.dart' as http;
-import 'package:nagrik_aur_samvidhan_app/Constants/Constants.dart';
-import 'dart:convert';
-import '../../../Services/http_service.dart';
 
-import 'package:nagrik_aur_samvidhan_app/Constants/Utils/app_urls.dart';
+import '../../../Constants/Constants.dart';
+import '../../../Services/http_service.dart';
 
 class CaseStudy {
   final String id;
@@ -35,17 +32,17 @@ class CaseStudy {
 
   factory CaseStudy.fromJson(Map<String, dynamic> json) {
     return CaseStudy(
-      id: json['_id'],
-      title: json['title'],
-      duration: json['duration'],
-      totalQuestions: json['totalQuestions'],
-      description: json["description"] ?? "",
-      difficulty: json['difficulty'],
+      id: json['_id'] ?? '',
+      title: json['title'] ?? '',
+      duration: json['duration'] ?? 0,
+      totalQuestions: json['totalQuestions'] ?? 0,
+      description: json['description'] ?? '',
+      difficulty: json['difficulty'] ?? '',
       isPassed: json['isPassed'] ?? false,
       isAttempted: json['isAttempted'] ?? false,
       score: json['score'] ?? 0,
-      percentage: json['percentage'] ?? "0",
-      type: json['type'],
+      percentage: (json['percentage'] ?? 0).toString(),
+      type: json['type'] ?? '',
     );
   }
 }
@@ -56,13 +53,6 @@ class CaseStudyController extends GetxController {
   final HttpService _httpService = Get.find<HttpService>();
 
   String title = "";
-
-  // @override
-  // void onInit() {
-  //   getArguments();
-  //   super.onInit();
-  //   fetchCaseStudies();
-  // }
 
   @override
   void onReady() {
@@ -76,20 +66,23 @@ class CaseStudyController extends GetxController {
     Debug.setLog('Title: $title');
   }
 
-  void fetchCaseStudies() async {
+  Future<void> fetchCaseStudies() async {
     isLoading(true);
-    final response =
-        await _httpService.authenticatedRequestGeneral('/map/${title}');
-    Debug.setLog('Case Studies response: $response');
-
     try {
-      // Assuming the case studies are stored directly in the response list
-      caseStudies.value = response
-          .map((caseStudyJson) => CaseStudy.fromJson(caseStudyJson))
-          .toList();
+      final response =
+          await _httpService.authenticatedRequestGeneral('/casestudy');
+      Debug.setLog('Case Studies response: $response');
+
+      if (response is List) {
+        caseStudies.value = response
+            .map((caseStudyJson) => CaseStudy.fromJson(caseStudyJson))
+            .toList();
+      } else {
+        throw Exception('Invalid response format');
+      }
     } catch (e) {
       print('Error fetching case studies: $e');
-      Get.snackbar('Error', 'An error occurred: $e');
+      Get.snackbar('Error', 'An error occurred while fetching case studies');
     } finally {
       isLoading(false);
     }

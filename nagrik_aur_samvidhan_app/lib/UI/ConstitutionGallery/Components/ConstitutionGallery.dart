@@ -1,5 +1,5 @@
-import 'dart:math';
 import 'package:flutter/material.dart';
+
 import '../../../Values/values.dart';
 import '../Controller/ConstitutionGalleryController.dart';
 import '../Controller/eight_way_swipe_detector.dart';
@@ -23,11 +23,10 @@ class _ConstitutionGalleryState extends State<ConstitutionGallery> {
   @override
   void initState() {
     super.initState();
-    _currentIndex = (_gridSize * _gridSize) ~/ 2; // Center of the grid
+    _currentIndex = (_gridSize * _gridSize) ~/ 2;
     _horizontalScrollController = ScrollController();
     _verticalScrollController = ScrollController();
 
-    // Scroll to the center tile after the layout is complete
     WidgetsBinding.instance.addPostFrameCallback((_) {
       _scrollToInitialPosition();
     });
@@ -46,7 +45,7 @@ class _ConstitutionGalleryState extends State<ConstitutionGallery> {
       centerX -
           (_horizontalScrollController.position.viewportDimension - itemWidth) /
               2,
-      duration: Duration(milliseconds: 500),
+      duration: Duration(milliseconds: 10),
       curve: Curves.easeOutCubic,
     );
 
@@ -54,7 +53,7 @@ class _ConstitutionGalleryState extends State<ConstitutionGallery> {
       centerY -
           (_verticalScrollController.position.viewportDimension - itemHeight) /
               2,
-      duration: Duration(milliseconds: 500),
+      duration: Duration(milliseconds: 10),
       curve: Curves.easeOutCubic,
     );
   }
@@ -76,8 +75,8 @@ class _ConstitutionGalleryState extends State<ConstitutionGallery> {
           child: LayoutBuilder(
             builder: (context, constraints) {
               final itemSize = Size(
-                constraints.maxWidth * 2.8 / _gridSize,
-                constraints.maxHeight * 2.7 / _gridSize,
+                constraints.maxWidth * 2.74 / _gridSize,
+                constraints.maxHeight * 2.41 / _gridSize,
               );
               return Stack(
                 children: [
@@ -117,16 +116,24 @@ class _ConstitutionGalleryState extends State<ConstitutionGallery> {
 
   Widget _buildImageTile(int index, Size itemSize) {
     final isSelected = index == _currentIndex;
-    return AnimatedContainer(
-      duration: Duration(milliseconds: 100),
-      transform: Matrix4.identity()..scale(isSelected ? 1.0 : .99),
-      child: Container(
-        margin: EdgeInsets.all(8),
-        child: ClipRRect(
-          borderRadius: BorderRadius.circular(8.0),
+    return GestureDetector(
+      onTap: () => _showImagePopup(index),
+      child: AnimatedContainer(
+        decoration: BoxDecoration(
+          borderRadius: BorderRadius.circular(8),
+        ),
+        duration: Duration(milliseconds: 10),
+        transform: Matrix4.identity()..scale(isSelected ? 1.0 : .99),
+        child: Container(
+          decoration: BoxDecoration(
+            color: MyColor.pendingStatus,
+            borderRadius: BorderRadius.circular(8),
+            border: Border.all(color: Colors.white, width: 1),
+          ),
+          margin: EdgeInsets.all(8),
           child: Image.asset(
             _imagePaths[index],
-            fit: BoxFit.cover,
+            fit: BoxFit.fill,
             width: itemSize.width,
             height: itemSize.height,
           ),
@@ -135,9 +142,63 @@ class _ConstitutionGalleryState extends State<ConstitutionGallery> {
     );
   }
 
+  void _showImagePopup(int index) {
+    showDialog(
+      context: context,
+      builder: (BuildContext context) {
+        return Dialog(
+          backgroundColor: Colors.transparent,
+          child: Container(
+            width: MediaQuery.of(context).size.width * 0.8,
+            padding: EdgeInsets.all(16),
+            decoration: BoxDecoration(
+              color: Colors.black,
+              borderRadius: BorderRadius.circular(16),
+            ),
+            child: Column(
+              mainAxisSize: MainAxisSize.min,
+              children: [
+                ClipRRect(
+                  borderRadius: BorderRadius.circular(8),
+                  child: InteractiveViewer(
+                    boundaryMargin: EdgeInsets.all(20),
+                    minScale: 0.5,
+                    maxScale: 4.0,
+                    child: Image.asset(
+                      _imagePaths[index],
+                      fit: BoxFit.contain,
+                      width: double.infinity,
+                      filterQuality: FilterQuality.high,
+                    ),
+                  ),
+                ),
+                SizedBox(height: 16),
+                Text(
+                  "Constitution Page ${index + 1}",
+                  style: TextStyle(
+                    fontSize: 18,
+                    fontWeight: FontWeight.bold,
+                    color: Colors.white,
+                  ),
+                ),
+                SizedBox(height: 8),
+                Text(
+                  "This is page ${index + 1} of the constitution. It contains important information about the fundamental principles and laws of the nation.",
+                  textAlign: TextAlign.center,
+                  style: TextStyle(color: Colors.white),
+                ),
+                SizedBox(height: 16),
+              ],
+            ),
+          ),
+        );
+      },
+    );
+  }
+
   Widget _buildAnimatedOverlay(Size itemSize) {
     return AnimatedPositioned(
-      duration: Duration(milliseconds: 300),
+      duration: Duration(milliseconds: 10),
       curve: Curves.easeOutCubic,
       left: (_currentIndex % _gridSize) * itemSize.width,
       top: (_currentIndex ~/ _gridSize) * itemSize.height,
@@ -154,7 +215,7 @@ class _ConstitutionGalleryState extends State<ConstitutionGallery> {
               // Golden color with opacity
               spreadRadius: 5,
               blurRadius: 7,
-              offset: Offset(0, 0),
+              offset: Offset(5, 7),
             ),
           ],
         ),

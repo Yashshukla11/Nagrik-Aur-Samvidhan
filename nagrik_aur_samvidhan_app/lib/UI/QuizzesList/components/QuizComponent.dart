@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:nagrik_aur_samvidhan_app/Values/values.dart';
 import '../controllers/QuizController.dart';
-import '../../PlayQuiz/components/PlayQuiz.dart'; // Add this import
+import '../../PlayQuiz/components/PlayQuiz.dart';
 
 class QuizzesComponent extends StatelessWidget {
   final QuizzesController controller = Get.put(QuizzesController());
@@ -19,7 +19,7 @@ class QuizzesComponent extends StatelessWidget {
           return Center(child: CircularProgressIndicator());
         } else {
           var quizzes =
-          controller.quizzes.where((quiz) => quiz.type == 'Quiz').toList();
+              controller.quizzes.where((quiz) => quiz.type == 'Quiz').toList();
 
           if (quizzes.isEmpty) {
             return const Center(
@@ -64,11 +64,11 @@ class QuizzesComponent extends StatelessWidget {
                             fontWeight: FontWeight.bold,
                           ),
                         ),
+                      if (quiz.description != null)
+                        Text('Description: ${quiz.description}'),
                     ],
                   ),
-                  onTap: () {
-                    Get.to(() => PlayQuiz(), arguments: {'quizId': quiz.id});
-                  },
+                  onTap: () => controller.handleQuizTap(quiz),
                 ),
               );
             },

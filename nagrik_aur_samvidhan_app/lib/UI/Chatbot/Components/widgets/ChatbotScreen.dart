@@ -1,100 +1,40 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_markdown/flutter_markdown.dart';
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:flutter_markdown/flutter_markdown.dart';
-import 'package:nagrik_aur_samvidhan_app/Elements/Widgets/spaces.dart';
+import 'package:url_launcher/url_launcher.dart';
+
+import '../../../../Elements/Widgets/spaces.dart';
 import '../../../../Values/values.dart';
 import '../../Controller/chatbotScreenController.dart';
 
 class Chatbot_Screen extends StatelessWidget {
-  final ChatbotScreenController _controller = Get.put(ChatbotScreenController());
-
-  // ScrollController to handle auto-scroll
+  final ChatbotScreenController _controller =
+      Get.put(ChatbotScreenController());
   final ScrollController _scrollController = ScrollController();
 
-  Chatbot_Screen({super.key});
+  Chatbot_Screen({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: const Color(0xFFF5F5DC), // Off-white or parchment color
-      appBar: AppBar(
-        automaticallyImplyLeading: false,
-        leading: Padding(
-          padding: const EdgeInsets.all(16.0),
-          child: GestureDetector(
-            onTap: () {
-              Get.back();
-            },
-            child: const Icon(
-              Icons.arrow_back_ios_new,
-              color: Colors.black,
-            ),
+      // backgroundColor: const Color(0xFFF5F5DC),
+      appBar: _buildAppBar(),
+      body: Container(
+        decoration: const BoxDecoration(
+          gradient: LinearGradient(
+            colors: [
+              Color(0xFF434343),
+              Color(0xFF000000),
+            ],
+            begin: Alignment.centerLeft,
+            end: Alignment.centerRight,
           ),
         ),
-        title: Text(
-          _controller.type == 'ConstitutionalBot'
-              ? "Constitutional Bot"
-              : "Educational Bot",
-          style: GoogleFonts.merriweather(
-            color: Colors.black,
-            fontWeight: FontWeight.bold,
-            fontSize: 18, // Increased font size for title
-          ),
-        ),
-        centerTitle: true,
-        backgroundColor: Colors.transparent,
-        elevation: 0,
-        actions: [
-          Padding(
-            padding: const EdgeInsets.only(right: 16.0),
-            child: Container(
-              padding: const EdgeInsets.all(8),
-              width: Sizes.WIDTH_120,
-              decoration: BoxDecoration(
-                color: MyColor.red,
-                border: Border.all(
-                  color: Colors.black,
-                  width: 1.0,
-                ),
-                borderRadius: BorderRadius.circular(8.0),
-              ),
-              child: GestureDetector(
-                onTap: () {
-                  _controller.clearMessages();
-                  Get.snackbar(
-                    'New Chat',
-                    _controller.type.value == 'ConstitutionalBot'
-                        ? "Ready to help you on legal matters"
-                        : "Ready to help you on general/educational matters",
-                    snackPosition: SnackPosition.TOP,
-                    backgroundColor: Colors.black,
-                    colorText: Colors.white,
-                    animationDuration: const Duration(milliseconds: 500),
-                    duration: const Duration(seconds: 1),
-                  );
-                },
-                child: Row(
-                  children: [
-                    Icon(Icons.gavel, color: MyColor.white),
-                    SpaceW4(),
-                    Text(
-                      MyString.newChat.tr,
-                      style: const TextStyle(color: MyColor.white),
-                    ),
-                  ],
-                ),
-              ),
-            ),
-          ),
-        ],
-      ),
-      body: Column(
-        children: [
-          Expanded(
-            child: Obx(
-                  () {
-                // Auto-scroll when messages change
+        child: Column(
+          children: [
+            Expanded(
+              child: Obx(() {
                 WidgetsBinding.instance.addPostFrameCallback((_) {
                   if (_scrollController.hasClients) {
                     _scrollController.animateTo(
@@ -113,59 +53,166 @@ class Chatbot_Screen extends StatelessWidget {
                     return _buildMessageItem(_controller.messages[index]);
                   },
                 );
-              },
+              }),
             ),
+            Obx(() => _controller.isLoading.value
+                ? const Padding(
+                    padding: EdgeInsets.all(8.0),
+                    child: CircularProgressIndicator(),
+                  )
+                : const SizedBox.shrink()),
+            Padding(
+              padding: const EdgeInsets.all(16.0),
+              child: _buildMessageInput(),
+            ),
+          ],
+        ),
+      ),
+    );
+  }
+
+  PreferredSizeWidget _buildAppBar() {
+    return AppBar(
+      automaticallyImplyLeading: false,
+      leading: Padding(
+        padding: const EdgeInsets.all(16.0),
+        child: GestureDetector(
+          onTap: () => Get.back(),
+          child: const Icon(Icons.arrow_back_ios_new, color: Colors.black),
+        ),
+      ),
+      title: Text(
+        _controller.type == 'ConstitutionalBot'
+            ? "Constitutional Bot"
+            : "Educational Bot",
+        style: GoogleFonts.merriweather(
+          color: Colors.black,
+          fontWeight: FontWeight.bold,
+          fontSize: 18,
+        ),
+      ),
+      centerTitle: true,
+      backgroundColor: Colors.transparent,
+      elevation: 0,
+      actions: [_buildNewChatButton()],
+    );
+  }
+
+  Widget _buildNewChatButton() {
+    return Padding(
+      padding: const EdgeInsets.only(right: 16.0),
+      child: Container(
+        padding: const EdgeInsets.all(8),
+        width: Sizes.WIDTH_120,
+        decoration: BoxDecoration(
+          color: MyColor.red,
+          border: Border.all(color: Colors.black, width: 1.0),
+          borderRadius: BorderRadius.circular(8.0),
+        ),
+        child: GestureDetector(
+          onTap: () {
+            _controller.clearMessages();
+            Get.snackbar(
+              'New Chat',
+              _controller.type.value == 'ConstitutionalBot'
+                  ? "Ready to help you on legal matters"
+                  : "Ready to help you on general/educational matters",
+              snackPosition: SnackPosition.TOP,
+              backgroundColor: Colors.black,
+              colorText: Colors.white,
+              animationDuration: const Duration(milliseconds: 500),
+              duration: const Duration(seconds: 1),
+            );
+          },
+          child: Row(
+            children: [
+              Icon(Icons.gavel, color: MyColor.white),
+              SpaceW4(),
+              Text(
+                MyString.newChat.tr,
+                style: const TextStyle(color: MyColor.white),
+              ),
+            ],
           ),
-          Obx(() => _controller.isLoading.value
-              ? const Padding(
-            padding: EdgeInsets.all(8.0),
-            child: CircularProgressIndicator(),
-          )
-              : const SizedBox.shrink()),
-          Padding(
-            padding: const EdgeInsets.all(16.0),
-            child: _buildMessageInput(),
-          ),
-        ],
+        ),
       ),
     );
   }
 
   Widget _buildMessageItem(String message) {
     bool isResponse = message.startsWith("answer: ");
+
+    // Preprocess the message to replace <br> and <p> tags, and highlight text in quotes and numbers
+    String processedMessage = message
+        .replaceAll("answer: ", "")
+        .replaceAll(RegExp(r'<br\s*\/?>', caseSensitive: false), '\n')
+        .replaceAll(RegExp(r'<\/?p>', caseSensitive: false), '\n');
+
+    // Highlight text within quotes and numeric values using custom wrappers
+    processedMessage = processedMessage
+        .replaceAllMapped(RegExp(r'"([^"]+)"'), (match) => '**"${match[1]}"**')
+        .replaceAllMapped(RegExp(r'\b\d+\b'), (match) => '**${match[0]}**');
+
     return Align(
       alignment: isResponse ? Alignment.centerLeft : Alignment.centerRight,
       child: Container(
         margin: const EdgeInsets.symmetric(vertical: 5),
         padding: const EdgeInsets.all(12),
+        constraints: BoxConstraints(
+          maxWidth: Get.width * 0.8,
+        ),
         decoration: BoxDecoration(
-          color: isResponse
-              ? const Color(0xFF9BC57E).withOpacity(0.9) // Light green for bot messages
-              : const Color(0xFFFFF9C4).withOpacity(0.9), // Light yellow for user messages
+          gradient: isResponse
+              ? const LinearGradient(
+                  colors: [Color(0xFFD7D2CC), Color(0xFF304352)],
+                  begin: Alignment.centerLeft,
+                  end: Alignment.centerRight,
+                )
+              : const LinearGradient(
+                  colors: [Color(0xFFEEF2F3), Color(0xFF8E9EAB)],
+                  begin: Alignment.centerLeft,
+                  end: Alignment.centerRight,
+                ),
           borderRadius: BorderRadius.only(
             topLeft: const Radius.circular(8),
             topRight: const Radius.circular(8),
-            bottomLeft: isResponse ? const Radius.circular(0) : const Radius.circular(8),
-            bottomRight: isResponse ? const Radius.circular(8) : const Radius.circular(0),
+            bottomLeft: isResponse
+                ? const Radius.circular(0)
+                : const Radius.circular(8),
+            bottomRight: isResponse
+                ? const Radius.circular(8)
+                : const Radius.circular(0),
           ),
         ),
         child: MarkdownBody(
-          data: message.replaceAll("answer: ", ""),  // Markdown content with line breaks
+          data: processedMessage,
           styleSheet: MarkdownStyleSheet(
-            p: GoogleFonts.libreBaskerville(
-              fontSize: 16,
-              color: Colors.black,
-              fontWeight: FontWeight.w600,
+            p: GoogleFonts.notoSans(fontSize: 16),
+            strong: const TextStyle(
+              color: Colors.black, // Highlighted color for quotes and numbers
+              fontWeight: FontWeight.w700,
             ),
+            h1: TextStyle(fontSize: 24, fontWeight: FontWeight.bold),
+            h2: TextStyle(fontSize: 22, fontWeight: FontWeight.bold),
+            h3: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
+            listBullet: TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
+            code: TextStyle(fontFamily: 'Courier', fontSize: 14),
           ),
-          softLineBreak: true, // Allows line breaks for '\n'
+          softLineBreak: false,
+          fitContent: true,
+          selectable: true,
+          onTapLink: (text, href, title) {
+            if (href != null) {
+              launchUrl(Uri.parse(href));
+            }
+          },
         ),
       ),
     );
   }
 
   Widget _buildMessageInput() {
-    TextEditingController _textController = TextEditingController();
+    final TextEditingController _textController = TextEditingController();
     return Container(
       padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 8),
       decoration: BoxDecoration(
@@ -177,32 +224,28 @@ class Chatbot_Screen extends StatelessWidget {
             color: Colors.grey.withOpacity(0.3),
             spreadRadius: 3,
             blurRadius: 5,
-            offset: const Offset(0, 3), // Shadow for depth
+            offset: const Offset(0, 3),
           ),
         ],
       ),
       child: Row(
         children: [
           Expanded(
-            child: SingleChildScrollView(
-              child: TextField(
-                autocorrect: true,
-                controller: _textController,
-                maxLines: null,
-                cursorColor: Colors.black,
-                style: GoogleFonts.libreBaskerville(
-                  fontSize: 16,
-                  color: Colors.black,
+            child: TextField(
+              controller: _textController,
+              maxLines: null,
+              cursorColor: Colors.black,
+              style: GoogleFonts.notoSans(
+                fontSize: 16,
+                color: Colors.black,
+              ),
+              decoration: InputDecoration(
+                hintText: MyString.message.tr,
+                border: InputBorder.none,
+                hintStyle: GoogleFonts.notoSans(
+                  color: Colors.black54,
                 ),
-                decoration: InputDecoration(
-                  labelStyle: const TextStyle(color: Colors.black),
-                  hintText: MyString.message.tr,
-                  border: InputBorder.none,
-                  hintStyle: GoogleFonts.libreBaskerville(
-                    color: Colors.black54,
-                  ),
-                  contentPadding: const EdgeInsets.symmetric(vertical: 12.0),
-                ),
+                contentPadding: const EdgeInsets.symmetric(vertical: 12.0),
               ),
             ),
           ),
@@ -213,12 +256,9 @@ class Chatbot_Screen extends StatelessWidget {
                 _textController.clear();
               }
             },
-            child: Padding(
-              padding: const EdgeInsets.all(8.0),
-              child: const Icon(
-                Icons.send,
-                color: Colors.black,
-              ),
+            child: const Padding(
+              padding: EdgeInsets.all(8.0),
+              child: Icon(Icons.send, color: Colors.black),
             ),
           ),
         ],

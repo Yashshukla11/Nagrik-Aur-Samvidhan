@@ -1,5 +1,7 @@
+import 'package:cached_network_image/cached_network_image.dart'; // Import the package
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+
 import '../../../../Values/values.dart';
 import '../../Controller/QuizScreenController.dart';
 
@@ -26,9 +28,12 @@ class Quiz extends StatelessWidget {
                 ),
               ],
               image: DecorationImage(
-                  image: AssetImage('assets/Quiz/cc.jpg'),
-                  fit: BoxFit.cover,
-                  alignment: Alignment.center),
+                image: CachedNetworkImageProvider(
+                  'https://i.postimg.cc/L8xxcq2V/jez-timms-8mu-UTAmc-WU4-unsplash.jpg',
+                ),
+                fit: BoxFit.cover,
+                alignment: Alignment.center,
+              ),
             ),
             child: Row(
               children: [
@@ -41,9 +46,10 @@ class Quiz extends StatelessWidget {
                       child: Text(
                         MyString.Quiz.tr,
                         style: TextStyle(
-                            fontSize: 22,
-                            fontWeight: FontWeight.w600,
-                            color: MyColor.black),
+                          fontSize: 22,
+                          fontWeight: FontWeight.w600,
+                          color: MyColor.white,
+                        ),
                       ),
                     ),
                     SizedBox(height: 15),
@@ -53,7 +59,9 @@ class Quiz extends StatelessWidget {
                       child: Text(
                         logic.mainQuizsubtitle.value,
                         style: TextStyle(
-                            color: MyColor.black, fontWeight: FontWeight.w500),
+                          color: MyColor.white,
+                          fontWeight: FontWeight.w600,
+                        ),
                       ),
                     ),
                   ],
@@ -61,7 +69,7 @@ class Quiz extends StatelessWidget {
                 Spacer(),
                 Icon(
                   Icons.arrow_forward_ios,
-                  color: MyColor.black,
+                  color: MyColor.white,
                 ),
               ],
             ),

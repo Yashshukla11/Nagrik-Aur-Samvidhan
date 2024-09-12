@@ -1,9 +1,9 @@
 import 'package:get/get.dart';
-import 'package:flutter/material.dart';
 import 'package:nagrik_aur_samvidhan_app/Constants/Constants.dart';
 import 'package:nagrik_aur_samvidhan_app/UI/Timeline/Components/Timeline.dart';
 
 import '../../../Values/values.dart';
+import '../../CaseStudiesList/components/CaseStudyComponent.dart';
 
 class QuizController extends GetxController {
   RxString caseStudysubtitle = MyString.caseStudysubTitle.tr.obs;
@@ -13,7 +13,7 @@ class QuizController extends GetxController {
 
   void onCaseStudyTap() {
     Debug.setLog("Navigating to Timeline with CaseStudy type");
-    Get.to(() => Timeline(), arguments: {'type': CaseStudy.value});
+    Get.to(() => CaseStudyComponent(), arguments: {"title": CaseStudy.value});
     Debug.setLog("Arguments passed: ${{'type': CaseStudy.value}}");
   }
 

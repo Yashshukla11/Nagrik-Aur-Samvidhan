@@ -16,7 +16,7 @@ class MyString {
   static const String explor = '';
 
 // Quiz Screen strings
-  static const String caseStudysubTitle = 'Let\'s think like Sherlock...';
+  static const String caseStudysubTitle = 'Enhance your understanding...';
   static const String mainQuizsubTitle =
       'Leverage your knowledge about the Constitution';
 
@@ -51,7 +51,6 @@ class MyString {
   static const String chatBot = 'ChatBot';
 
   static const String ChatBotEducational = 'Need help';
-
 
   static const String ChatBotsubTitle = 'Let\'s Go...';
 

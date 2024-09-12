@@ -1,9 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:google_fonts/google_fonts.dart';
 import 'package:get/get.dart';
-import '../../../Values/values.dart';
+import 'package:google_fonts/google_fonts.dart';
+
 import '../../../Constants/app_controller.dart';
+import '../../../Values/values.dart';
 
 class SplashScreen extends StatefulWidget {
   const SplashScreen({Key? key}) : super(key: key);
@@ -81,7 +82,7 @@ class _SplashScreenState extends State<SplashScreen>
                   Colors.white, // White
                   Color(0xFF138808), // Green
                 ],
-                stops: [0.33, 0.5, 0.67], // Distribute colors evenly
+                stops: [0.28, 0.5, 0.87], // Distribute colors evenly
               ),
             ),
           ),

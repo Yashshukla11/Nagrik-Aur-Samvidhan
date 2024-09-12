@@ -1,5 +1,7 @@
+import 'package:cached_network_image/cached_network_image.dart'; // Import the package
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+
 import '../../../../Values/values.dart';
 import '../../Controller/QuizScreenController.dart';
 
@@ -26,8 +28,12 @@ class CaseStudyTile extends StatelessWidget {
                 ),
               ],
               image: DecorationImage(
-                image: AssetImage('assets/Quiz/case1.jpg'),
+                image: CachedNetworkImageProvider(
+                  // Use CachedNetworkImageProvider for background
+                  'https://i.postimg.cc/yd9v5vLM/case1.jpg', // Replace the URL with your image URL
+                ),
                 fit: BoxFit.fitWidth,
+                alignment: Alignment.center,
               ),
             ),
             child: Row(
@@ -41,15 +47,17 @@ class CaseStudyTile extends StatelessWidget {
                       child: Text(
                         MyString.caseStudy.tr,
                         style: TextStyle(
-                            fontSize: 22,
-                            fontWeight: FontWeight.w600,
-                            color: MyColor.white),
+                          fontSize: 22,
+                          fontWeight: FontWeight.w600,
+                          color: MyColor.white,
+                        ),
                       ),
                     ),
                     SizedBox(height: 46),
                     Text(
                       logic.caseStudysubtitle.value,
-                      style: TextStyle(color: MyColor.white),
+                      style: TextStyle(
+                          color: MyColor.white, fontWeight: FontWeight.w600),
                     ),
                   ],
                 ),
