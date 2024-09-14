@@ -174,7 +174,7 @@ class _ConstitutionGalleryState extends State<ConstitutionGallery> {
                 ),
                 SizedBox(height: 16),
                 Text(
-                  "Constitution Page ${index + 1}",
+                  "Fundamental Rights",
                   style: TextStyle(
                     fontSize: 18,
                     fontWeight: FontWeight.bold,
@@ -182,10 +182,20 @@ class _ConstitutionGalleryState extends State<ConstitutionGallery> {
                   ),
                 ),
                 SizedBox(height: 8),
-                Text(
-                  "This is page ${index + 1} of the constitution. It contains important information about the fundamental principles and laws of the nation.",
-                  textAlign: TextAlign.center,
-                  style: TextStyle(color: Colors.white),
+                Flexible(
+                  child: Container(
+                    height: 200, // Set a fixed height for the scrollable area
+                    child: SingleChildScrollView(
+                      scrollDirection: Axis.vertical,
+                      child: Text(
+                        "Fundamental Rights in the Indian Constitution are enshrined in Part III (Articles 12-35) and guarantee citizens’ basic freedoms and protections. They include the Right to Equality, Right to Freedom, Right against Exploitation, Right to Freedom of Religion, and Cultural and Educational Rights, ensuring dignity, equality, and justice for all citizens.",
+                        textAlign: TextAlign.center,
+                        style: TextStyle(
+                          color: Colors.white,
+                        ),
+                      ),
+                    ),
+                  ),
                 ),
                 SizedBox(height: 16),
               ],

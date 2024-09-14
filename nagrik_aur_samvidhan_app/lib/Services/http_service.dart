@@ -1,6 +1,7 @@
 import 'package:dio/dio.dart';
 import 'package:get/get.dart';
 import 'package:nagrik_aur_samvidhan_app/Constants/Utils/app_urls.dart';
+
 import 'secured_storage.dart';
 
 class HttpService extends GetxService {
@@ -60,6 +61,11 @@ class HttpService extends GetxService {
     } on DioError catch (e) {
       throw e.message ?? 'An error occurred';
     }
+  }
+
+  Future<Map<String, dynamic>> authenticatedPut(String path,
+      {required Map<String, dynamic> body}) async {
+    return authenticatedRequest(path, method: 'PUT', data: body);
   }
 
   Future<List<dynamic>> authenticatedRequestGeneral(String path,

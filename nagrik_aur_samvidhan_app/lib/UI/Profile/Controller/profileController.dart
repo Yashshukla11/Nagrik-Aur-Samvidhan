@@ -1,9 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:nagrik_aur_samvidhan_app/Constants/Constants.dart';
+
 import '../../../Localization/Translation/localization_service.dart';
 import '../../../Localization/Translation/translations.dart';
 import '../../../Services/http_service.dart';
-import '../../../Services/secured_storage.dart'; // Add this import
+import '../../../Services/secured_storage.dart';
 
 class ProfileController extends GetxController {
   final RxString _currentTheme = 'Light'.obs;
@@ -26,6 +28,15 @@ class ProfileController extends GetxController {
   final HttpService _httpService = Get.find<HttpService>();
   final SecureStorage _secureStorage = Get.find<SecureStorage>();
 
+  // Form controllers
+  final nameController = TextEditingController();
+  final ageController = TextEditingController();
+  final genderController = TextEditingController();
+  final phoneNumberController = TextEditingController();
+  final addressController = TextEditingController();
+  final cityController = TextEditingController();
+  final stateController = TextEditingController();
+
   @override
   void onInit() {
     super.onInit();
@@ -37,8 +48,47 @@ class ProfileController extends GetxController {
       _isLoading.value = true;
       final response = await _httpService.authenticatedRequest('/user/get');
       _userData.value = response;
+      _populateTextControllers();
+      Debug.setLog('----response-----${response}');
     } catch (e) {
       print('Error fetching user data: $e');
+    } finally {
+      _isLoading.value = false;
+    }
+  }
+
+  void _populateTextControllers() {
+    nameController.text = userData['name'] ?? '';
+    ageController.text = userData['age']?.toString() ?? '';
+    genderController.text = userData['gender'] ?? '';
+    phoneNumberController.text = userData['phoneNumber'] ?? '';
+    addressController.text = userData['address'] ?? '';
+    cityController.text = userData['city'] ?? '';
+    stateController.text = userData['state'] ?? '';
+  }
+
+  Future<void> updateProfile() async {
+    try {
+      _isLoading.value = true;
+      final updatedData = {
+        "name": nameController.text,
+        "password": "demo", // Note: You might want to handle this differently
+        "age": ageController.text,
+        "gender": genderController.text,
+        "phoneNumber": phoneNumberController.text,
+        "address": addressController.text,
+        "city": cityController.text,
+        "state": stateController.text,
+        "language": currentLanguage,
+      };
+
+      final response =
+          await _httpService.authenticatedPut('/user', body: updatedData);
+      _userData.value = response;
+      Get.snackbar('Success', 'Profile updated successfully');
+    } catch (e) {
+      print('Error updating profile: $e');
+      Get.snackbar('Error', 'Failed to update profile. Please try again.');
     } finally {
       _isLoading.value = false;
     }
@@ -64,7 +114,7 @@ class ProfileController extends GetxController {
         actions: [
           TextButton(
             child: Text('No'),
-            onPressed: () => Get.back(), // Close the dialog
+            onPressed: () => Get.back(),
           ),
           TextButton(
             child: Text('Yes'),
@@ -77,17 +127,28 @@ class ProfileController extends GetxController {
 
   Future<void> _performLogout() async {
     try {
-      await _secureStorage.deleteToken(); // Clear the stored token
-      Get.offAllNamed(
-          '/login'); // Navigate to login screen and remove all previous routes
+      await _secureStorage.deleteToken();
+      Get.offAllNamed('/login');
     } catch (e) {
       print('Error during logout: $e');
-      Get.back(); // Close the dialog
+      Get.back();
       Get.snackbar(
         'Error',
         'Failed to logout. Please try again.',
         snackPosition: SnackPosition.BOTTOM,
       );
     }
+  }
+
+  @override
+  void onClose() {
+    nameController.dispose();
+    ageController.dispose();
+    genderController.dispose();
+    phoneNumberController.dispose();
+    addressController.dispose();
+    cityController.dispose();
+    stateController.dispose();
+    super.onClose();
   }
 }

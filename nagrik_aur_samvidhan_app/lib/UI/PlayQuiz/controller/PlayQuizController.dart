@@ -31,6 +31,8 @@ class PlayQuizController extends GetxController {
   var isLoading = true.obs;
   var questions = <Question>[].obs;
   var currentQuestionIndex = 0.obs;
+  var lastAnsweredQuestionIndex =
+      (-1).obs; // New variable to track last answered question
   final RxInt selectedAnswer = RxInt(-1);
   var quizTitle = ''.obs;
   var attemptId = ''.obs;
@@ -42,6 +44,8 @@ class PlayQuizController extends GetxController {
   final HttpService _httpService = Get.find<HttpService>();
   var answerSubmitted = false.obs;
   var hasMovedToNextQuestion = false.obs;
+
+  var canSelectAnswer = true.obs;
 
   @override
   void onInit() {
@@ -76,8 +80,23 @@ class PlayQuizController extends GetxController {
   }
 
   void selectAnswer(int index) {
-    if (!hasMovedToNextQuestion.value) {
+    if (canSelectAnswer()) {
       selectedAnswer.value = index;
+    } else {
+      // Show popup to inform user to go back to current question
+      Get.dialog(
+        AlertDialog(
+          title: Text('Cannot Select Answer'),
+          content: Text(
+              'Please return to the current question to select an answer.'),
+          actions: [
+            TextButton(
+              child: Text('OK'),
+              onPressed: () => Get.back(),
+            ),
+          ],
+        ),
+      );
     }
   }
 
@@ -123,9 +142,17 @@ class PlayQuizController extends GetxController {
     if (currentQuestionIndex.value < questions.length - 1) {
       nextQuestion();
       answerSubmitted.value = false;
-      hasMovedToNextQuestion.value = true;
+      hasMovedToNextQuestion.value = false;
     } else {
       lastQuestionAnswered.value = true;
+    }
+  }
+
+  void nextQuestion() {
+    if (currentQuestionIndex.value < questions.length - 1) {
+      currentQuestionIndex++;
+      selectedAnswer.value = -1;
+      hasMovedToNextQuestion.value = true;
     }
   }
 
@@ -173,36 +200,14 @@ class PlayQuizController extends GetxController {
 
       if (response['message'] == "Attempt already submitted") {
         quizSubmitted.value = true;
-        Get.snackbar('Info', 'This quiz/casestudy has already been submitted');
+        Get.snackbar('Info', 'Already been submitted');
       } else {
         quizSubmitted.value = true;
-        Get.snackbar('Success', 'Quiz/CaseStudy submitted successfully');
+        Get.snackbar('Success', 'Submitted successfully');
 
         // For CaseStudy, show the result
         if (isCaseStudy.value) {
-          Get.dialog(
-            AlertDialog(
-              title: Text('CaseStudy Result'),
-              content: Column(
-                mainAxisSize: MainAxisSize.min,
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  Text(
-                      'Correct Answers: ${response['numberOfCorrectAnswers']}'),
-                  Text('Score: ${response['score']}'),
-                  Text('Total Questions: ${response['totalQuestions']}'),
-                  Text('Percentage: ${response['percentage']}%'),
-                  Text('Passed: ${response['isPassed'] ? 'Yes' : 'No'}'),
-                ],
-              ),
-              actions: [
-                TextButton(
-                  child: Text('OK'),
-                  onPressed: () => Get.back(),
-                ),
-              ],
-            ),
-          );
+          _showCaseStudyResult(response);
         }
       }
     } catch (e) {
@@ -213,12 +218,29 @@ class PlayQuizController extends GetxController {
     }
   }
 
-  void nextQuestion() {
-    if (currentQuestionIndex.value < questions.length - 1) {
-      currentQuestionIndex++;
-      selectedAnswer.value = -1;
-      hasMovedToNextQuestion.value = true;
-    }
+  void _showCaseStudyResult(Map<String, dynamic> response) {
+    Get.dialog(
+      AlertDialog(
+        title: Text('CaseStudy Result'),
+        content: Column(
+          mainAxisSize: MainAxisSize.min,
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            Text('Correct Answers: ${response['numberOfCorrectAnswers']}'),
+            Text('Score: ${response['score']}'),
+            Text('Total Questions: ${response['totalQuestions']}'),
+            Text('Percentage: ${response['percentage']}%'),
+            Text('Passed: ${response['isPassed'] ? 'Yes' : 'No'}'),
+          ],
+        ),
+        actions: [
+          TextButton(
+            child: Text('OK'),
+            onPressed: () => Get.back(),
+          ),
+        ],
+      ),
+    );
   }
 
   void previousQuestion() {

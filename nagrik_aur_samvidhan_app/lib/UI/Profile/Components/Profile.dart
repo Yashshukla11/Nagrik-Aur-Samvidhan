@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:nagrik_aur_samvidhan_app/Values/values.dart';
+
 import '../../../Localization/Translation/translations.dart';
 import '../Controller/profileController.dart';
 
@@ -39,6 +40,7 @@ class ProfileScreen extends StatelessWidget {
             children: [
               _buildPersonalInfo(),
               _buildSettings(),
+              _buildUpdateButton(),
             ],
           ),
         );
@@ -63,27 +65,29 @@ class ProfileScreen extends StatelessWidget {
             ),
           ),
           SizedBox(height: 16),
-          _buildInfoTile(
-              Icons.person, 'Name', controller.userData['name'] ?? 'N/A'),
-          _buildInfoTile(
-              Icons.email, 'Email', controller.userData['email'] ?? 'N/A'),
-          _buildInfoTile(Icons.cake, 'Age',
-              controller.userData['age']?.toString() ?? 'N/A'),
-          _buildInfoTile(Icons.person_outline, 'Gender',
-              controller.userData['gender'] ?? 'N/A'),
-          _buildInfoTile(Icons.phone, 'Phone Number',
-              controller.userData['phoneNumber'] ?? 'N/A'),
-          _buildInfoTile(Icons.language, 'Language',
-              controller.userData['language'] ?? 'N/A'),
+          _buildEditableField('Name', controller.nameController),
+          _buildEditableField('Age', controller.ageController),
+          _buildEditableField('Gender', controller.genderController),
+          _buildEditableField('Phone Number', controller.phoneNumberController),
+          _buildEditableField('Address', controller.addressController),
+          _buildEditableField('City', controller.cityController),
+          _buildEditableField('State', controller.stateController),
         ],
       ),
     );
   }
 
-  Widget _buildInfoTile(IconData icon, String title, String value) {
-    return ListTile(
-      leading: Icon(icon),
-      title: Text('$title: $value'),
+  Widget _buildEditableField(
+      String label, TextEditingController textController) {
+    return Padding(
+      padding: const EdgeInsets.symmetric(vertical: 8.0),
+      child: TextField(
+        controller: textController,
+        decoration: InputDecoration(
+          labelText: label,
+          border: OutlineInputBorder(),
+        ),
+      ),
     );
   }
 
@@ -96,25 +100,6 @@ class ProfileScreen extends StatelessWidget {
           Text('settings'.tr,
               style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold)),
           SizedBox(height: 16),
-          ListTile(
-            leading: Icon(Icons.settings),
-            title: Text('Theme'.tr),
-            trailing: Obx(() => DropdownButton<String>(
-                  value: controller.currentTheme,
-                  onChanged: (String? newValue) {
-                    if (newValue != null) {
-                      controller.setTheme(newValue);
-                    }
-                  },
-                  items: controller.themeOptions
-                      .map<DropdownMenuItem<String>>((String value) {
-                    return DropdownMenuItem<String>(
-                      value: value,
-                      child: Text(value),
-                    );
-                  }).toList(),
-                )),
-          ),
           ListTile(
             leading: Icon(Icons.language),
             title: Text(' Change Language'.tr),
@@ -138,6 +123,21 @@ class ProfileScreen extends StatelessWidget {
                 )),
           ),
         ],
+      ),
+    );
+  }
+
+  Widget _buildUpdateButton() {
+    return Container(
+      padding: EdgeInsets.all(16),
+      child: ElevatedButton(
+        onPressed: () => controller.updateProfile(),
+        child: Text('Update Profile'),
+        style: ElevatedButton.styleFrom(
+          foregroundColor: Colors.white,
+          backgroundColor: Color(0xFFE27D4E),
+          padding: EdgeInsets.symmetric(horizontal: 50, vertical: 15),
+        ),
       ),
     );
   }

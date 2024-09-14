@@ -8,17 +8,26 @@ import '../../../../Elements/Widgets/spaces.dart';
 import '../../../../Values/values.dart';
 import '../../Controller/chatbotScreenController.dart';
 
-class Chatbot_Screen extends StatelessWidget {
-  final ChatbotScreenController _controller =
-      Get.put(ChatbotScreenController());
+class Chatbot_Screen extends StatefulWidget {
+  const Chatbot_Screen({Key? key}) : super(key: key);
+
+  @override
+  _Chatbot_ScreenState createState() => _Chatbot_ScreenState();
+}
+
+class _Chatbot_ScreenState extends State<Chatbot_Screen> {
+  late ChatbotScreenController _controller;
   final ScrollController _scrollController = ScrollController();
 
-  Chatbot_Screen({Key? key}) : super(key: key);
+  @override
+  void initState() {
+    super.initState();
+    _controller = Get.put(ChatbotScreenController());
+  }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      // backgroundColor: const Color(0xFFF5F5DC),
       appBar: _buildAppBar(),
       body: Container(
         decoration: const BoxDecoration(
@@ -142,13 +151,11 @@ class Chatbot_Screen extends StatelessWidget {
   Widget _buildMessageItem(String message) {
     bool isResponse = message.startsWith("answer: ");
 
-    // Preprocess the message to replace <br> and <p> tags, and highlight text in quotes and numbers
     String processedMessage = message
         .replaceAll("answer: ", "")
         .replaceAll(RegExp(r'<br\s*\/?>', caseSensitive: false), '\n')
         .replaceAll(RegExp(r'<\/?p>', caseSensitive: false), '\n');
 
-    // Highlight text within quotes and numeric values using custom wrappers
     processedMessage = processedMessage
         .replaceAllMapped(RegExp(r'"([^"]+)"'), (match) => '**"${match[1]}"**')
         .replaceAllMapped(RegExp(r'\b\d+\b'), (match) => '**${match[0]}**');
@@ -184,28 +191,45 @@ class Chatbot_Screen extends StatelessWidget {
                 : const Radius.circular(0),
           ),
         ),
-        child: MarkdownBody(
-          data: processedMessage,
-          styleSheet: MarkdownStyleSheet(
-            p: GoogleFonts.notoSans(fontSize: 16),
-            strong: const TextStyle(
-              color: Colors.black, // Highlighted color for quotes and numbers
-              fontWeight: FontWeight.w700,
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            MarkdownBody(
+              data: processedMessage,
+              styleSheet: MarkdownStyleSheet(
+                p: GoogleFonts.notoSans(fontSize: 16),
+                strong: const TextStyle(
+                  color: Colors.black,
+                  fontWeight: FontWeight.w700,
+                ),
+                h1: TextStyle(fontSize: 24, fontWeight: FontWeight.bold),
+                h2: TextStyle(fontSize: 22, fontWeight: FontWeight.bold),
+                h3: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
+                listBullet:
+                    TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
+                code: TextStyle(fontFamily: 'Courier', fontSize: 14),
+              ),
+              softLineBreak: false,
+              fitContent: true,
+              selectable: true,
+              onTapLink: (text, href, title) {
+                if (href != null) {
+                  launchUrl(Uri.parse(href));
+                }
+              },
             ),
-            h1: TextStyle(fontSize: 24, fontWeight: FontWeight.bold),
-            h2: TextStyle(fontSize: 22, fontWeight: FontWeight.bold),
-            h3: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
-            listBullet: TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
-            code: TextStyle(fontFamily: 'Courier', fontSize: 14),
-          ),
-          softLineBreak: false,
-          fitContent: true,
-          selectable: true,
-          onTapLink: (text, href, title) {
-            if (href != null) {
-              launchUrl(Uri.parse(href));
-            }
-          },
+            if (isResponse)
+              Align(
+                alignment: Alignment.centerRight,
+                child: IconButton(
+                  icon: Icon(
+                    Icons.volume_up,
+                    color: MyColor.white,
+                  ),
+                  onPressed: () => _controller.speakMessage(processedMessage),
+                ),
+              ),
+          ],
         ),
       ),
     );

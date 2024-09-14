@@ -15,6 +15,8 @@ class CaseStudy {
   final int score;
   final String percentage;
   final String type;
+  final String? image;
+  final String? url;
 
   CaseStudy({
     required this.id,
@@ -28,6 +30,8 @@ class CaseStudy {
     this.score = 0,
     this.percentage = "0",
     required this.type,
+    this.image,
+    this.url,
   });
 
   factory CaseStudy.fromJson(Map<String, dynamic> json) {
@@ -43,6 +47,8 @@ class CaseStudy {
       score: json['score'] ?? 0,
       percentage: (json['percentage'] ?? 0).toString(),
       type: json['type'] ?? '',
+      image: json['image'],
+      url: json['url'],
     );
   }
 }
