@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 
 import '../../../Values/values.dart';
 import '../Controller/ConstitutionGalleryController.dart';
@@ -13,12 +14,16 @@ class ConstitutionGallery extends StatefulWidget {
 
 class _ConstitutionGalleryState extends State<ConstitutionGallery> {
   static const int _gridSize = 6;
+  static const int _contentSize = 4;
   late int _currentIndex;
-  late final List<String> _imagePaths =
-      ConstitutionGalleryController.getConstitutionPages();
+  late List<ConstitutionPage?> _pages =
+      List.filled(_gridSize * _gridSize, null);
   Offset _lastSwipeDir = Offset.zero;
   late ScrollController _horizontalScrollController;
   late ScrollController _verticalScrollController;
+
+  final ConstitutionGalleryController _controller =
+      Get.put(ConstitutionGalleryController());
 
   @override
   void initState() {
@@ -26,10 +31,59 @@ class _ConstitutionGalleryState extends State<ConstitutionGallery> {
     _currentIndex = (_gridSize * _gridSize) ~/ 2;
     _horizontalScrollController = ScrollController();
     _verticalScrollController = ScrollController();
+    _fetchPages();
+  }
 
-    WidgetsBinding.instance.addPostFrameCallback((_) {
-      _scrollToInitialPosition();
-    });
+  Future<void> _fetchPages() async {
+    try {
+      final fetchedPages =
+          await ConstitutionGalleryController.fetchConstitutionPages();
+      setState(() {
+        List<ConstitutionPage> uniquePages = [];
+        List<ConstitutionPage> duplicatePages = [];
+        Set<String> seenType1 = {};
+
+        for (var page in fetchedPages) {
+          if (page.type == "0") {
+            if (!seenType1.contains(page.id)) {
+              uniquePages.add(page);
+              seenType1.add(page.id);
+            }
+          } else {
+            uniquePages.add(page);
+            duplicatePages.add(page);
+          }
+
+          if (uniquePages.length >= 16) break;
+        }
+
+        while (uniquePages.length < 16 && duplicatePages.isNotEmpty) {
+          uniquePages
+              .add(duplicatePages[uniquePages.length % duplicatePages.length]);
+        }
+
+        int startRow = (_gridSize - _contentSize) ~/ 2;
+        int startCol = (_gridSize - _contentSize) ~/ 2;
+        for (int i = 0; i < _contentSize; i++) {
+          for (int j = 0; j < _contentSize; j++) {
+            int index = (startRow + i) * _gridSize + (startCol + j);
+            int contentIndex = i * _contentSize + j;
+            if (contentIndex < uniquePages.length) {
+              _pages[index] = uniquePages[contentIndex];
+            }
+          }
+        }
+
+        _currentIndex = _pages.indexWhere((page) => page?.type == "0");
+        if (_currentIndex == -1) _currentIndex = (_gridSize * _gridSize) ~/ 2;
+      });
+      WidgetsBinding.instance.addPostFrameCallback((_) {
+        _scrollToInitialPosition();
+      });
+    } catch (e) {
+      print('Error fetching pages: $e');
+      Get.snackbar('Error', 'Failed to load constitution pages');
+    }
   }
 
   void _scrollToInitialPosition() {
@@ -45,7 +99,7 @@ class _ConstitutionGalleryState extends State<ConstitutionGallery> {
       centerX -
           (_horizontalScrollController.position.viewportDimension - itemWidth) /
               2,
-      duration: Duration(milliseconds: 10),
+      duration: Duration(milliseconds: 300),
       curve: Curves.easeOutCubic,
     );
 
@@ -53,7 +107,7 @@ class _ConstitutionGalleryState extends State<ConstitutionGallery> {
       centerY -
           (_verticalScrollController.position.viewportDimension - itemHeight) /
               2,
-      duration: Duration(milliseconds: 10),
+      duration: Duration(milliseconds: 300),
       curve: Curves.easeOutCubic,
     );
   }
@@ -70,23 +124,25 @@ class _ConstitutionGalleryState extends State<ConstitutionGallery> {
     return Scaffold(
       backgroundColor: Colors.black,
       body: SafeArea(
-        child: EightWaySwipeDetector(
-          onSwipe: _handleSwipe,
-          child: LayoutBuilder(
-            builder: (context, constraints) {
-              final itemSize = Size(
-                constraints.maxWidth * 2.74 / _gridSize,
-                constraints.maxHeight * 2.41 / _gridSize,
-              );
-              return Stack(
-                children: [
-                  _buildImageGrid(itemSize),
-                  _buildAnimatedOverlay(itemSize),
-                ],
-              );
-            },
-          ),
-        ),
+        child: _pages.every((element) => element == null)
+            ? Center(child: CircularProgressIndicator())
+            : EightWaySwipeDetector(
+                onSwipe: _handleSwipe,
+                child: LayoutBuilder(
+                  builder: (context, constraints) {
+                    final itemSize = Size(
+                      constraints.maxWidth * 3.6 / _gridSize,
+                      constraints.maxHeight * 2.71 / _gridSize,
+                    );
+                    return Stack(
+                      children: [
+                        _buildImageGrid(itemSize),
+                        _buildAnimatedOverlay(itemSize),
+                      ],
+                    );
+                  },
+                ),
+              ),
       ),
     );
   }
@@ -106,7 +162,7 @@ class _ConstitutionGalleryState extends State<ConstitutionGallery> {
               crossAxisCount: _gridSize,
               childAspectRatio: itemSize.aspectRatio,
             ),
-            itemCount: _imagePaths.length,
+            itemCount: _pages.length,
             itemBuilder: (context, index) => _buildImageTile(index, itemSize),
           ),
         ),
@@ -116,33 +172,46 @@ class _ConstitutionGalleryState extends State<ConstitutionGallery> {
 
   Widget _buildImageTile(int index, Size itemSize) {
     final isSelected = index == _currentIndex;
+    final page = _pages[index];
+    if (page == null) {
+      return Container();
+    }
     return GestureDetector(
-      onTap: () => _showImagePopup(index),
+      onTap: () => _showImagePopup(page),
       child: AnimatedContainer(
         decoration: BoxDecoration(
           borderRadius: BorderRadius.circular(8),
         ),
-        duration: Duration(milliseconds: 10),
-        transform: Matrix4.identity()..scale(isSelected ? 1.0 : .99),
+        duration: Duration(milliseconds: 300),
+        transform: Matrix4.identity()..scale(isSelected ? 1.1 : .99),
         child: Container(
           decoration: BoxDecoration(
             color: MyColor.pendingStatus,
             borderRadius: BorderRadius.circular(8),
             border: Border.all(color: Colors.white, width: 1),
           ),
-          margin: EdgeInsets.all(8),
-          child: Image.asset(
-            _imagePaths[index],
+          margin: EdgeInsets.all(16),
+          child: Image.network(
+            page.image,
             fit: BoxFit.fill,
             width: itemSize.width,
             height: itemSize.height,
+            loadingBuilder: (context, child, loadingProgress) {
+              if (loadingProgress == null) return child;
+              return Center(child: CircularProgressIndicator());
+            },
+            errorBuilder: (context, error, stackTrace) {
+              return Center(child: Icon(Icons.error));
+            },
           ),
         ),
       ),
     );
   }
 
-  void _showImagePopup(int index) {
+  void _showImagePopup(ConstitutionPage page) async {
+    String summary = await _controller.fetchSummary(page.title);
+
     showDialog(
       context: context,
       builder: (BuildContext context) {
@@ -164,8 +233,8 @@ class _ConstitutionGalleryState extends State<ConstitutionGallery> {
                     boundaryMargin: EdgeInsets.all(20),
                     minScale: 0.5,
                     maxScale: 4.0,
-                    child: Image.asset(
-                      _imagePaths[index],
+                    child: Image.network(
+                      page.image,
                       fit: BoxFit.contain,
                       width: double.infinity,
                       filterQuality: FilterQuality.high,
@@ -174,7 +243,7 @@ class _ConstitutionGalleryState extends State<ConstitutionGallery> {
                 ),
                 SizedBox(height: 16),
                 Text(
-                  "Fundamental Rights",
+                  page.title,
                   style: TextStyle(
                     fontSize: 18,
                     fontWeight: FontWeight.bold,
@@ -184,11 +253,11 @@ class _ConstitutionGalleryState extends State<ConstitutionGallery> {
                 SizedBox(height: 8),
                 Flexible(
                   child: Container(
-                    height: 200, // Set a fixed height for the scrollable area
+                    height: 200,
                     child: SingleChildScrollView(
                       scrollDirection: Axis.vertical,
                       child: Text(
-                        "Fundamental Rights in the Indian Constitution are enshrined in Part III (Articles 12-35) and guarantee citizens’ basic freedoms and protections. They include the Right to Equality, Right to Freedom, Right against Exploitation, Right to Freedom of Religion, and Cultural and Educational Rights, ensuring dignity, equality, and justice for all citizens.",
+                        summary,
                         textAlign: TextAlign.center,
                         style: TextStyle(
                           color: Colors.white,
@@ -208,7 +277,7 @@ class _ConstitutionGalleryState extends State<ConstitutionGallery> {
 
   Widget _buildAnimatedOverlay(Size itemSize) {
     return AnimatedPositioned(
-      duration: Duration(milliseconds: 10),
+      duration: Duration(milliseconds: 300),
       curve: Curves.easeOutCubic,
       left: (_currentIndex % _gridSize) * itemSize.width,
       top: (_currentIndex ~/ _gridSize) * itemSize.height,
@@ -217,12 +286,10 @@ class _ConstitutionGalleryState extends State<ConstitutionGallery> {
         height: itemSize.height,
         decoration: BoxDecoration(
           border: Border.all(color: Color(0xFFFFD700), width: 4),
-          // Golden color
           borderRadius: BorderRadius.circular(8),
           boxShadow: [
             BoxShadow(
               color: Color(0xFFFFD700).withOpacity(0.5),
-              // Golden color with opacity
               spreadRadius: 5,
               blurRadius: 7,
               offset: Offset(5, 7),
@@ -245,7 +312,9 @@ class _ConstitutionGalleryState extends State<ConstitutionGallery> {
         newIndex += (direction.dx > 0 ? 1 : -1);
       }
 
-      if (newIndex >= 0 && newIndex < _imagePaths.length) {
+      if (newIndex >= 0 &&
+          newIndex < _pages.length &&
+          _pages[newIndex] != null) {
         _currentIndex = newIndex;
         _scrollToIndex(newIndex, direction);
       }

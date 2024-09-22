@@ -8,6 +8,9 @@ class AppUrls {
   static String apiBaseUrl = '$baseUrl';
   static String chatBotUrl =
       'https://rrarpy47de.execute-api.ap-south-1.amazonaws.com';
+
+  static String AiBotUrl =
+      'https://rrarpy47de.execute-api.ap-south-1.amazonaws.com';
   static String uploadMediaUrl = '$apiBaseUrl/api/';
 
   static String isUserExistUrl(contact) =>

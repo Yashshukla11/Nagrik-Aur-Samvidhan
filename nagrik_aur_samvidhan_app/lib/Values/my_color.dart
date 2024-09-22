@@ -151,7 +151,7 @@ class MyColor {
 
   // other color
   static const cyan = Color(0xFF00FFFF);
-  static const darkBlue = Color(0xFF00008B);
+  static const darkBlue = Color(0xFF06038D);
   static const lightBlue = Color(0xFFADD8E6);
   static const lightBlack = Color(0xFF000000);
   static const purple = Color(0xFF800080);

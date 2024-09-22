@@ -1,11 +1,13 @@
+import 'dart:math' show pi, sin;
+
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:nagrik_aur_samvidhan_app/UI/CaseStudiesList/components/CaseStudyComponent.dart';
 import 'package:nagrik_aur_samvidhan_app/UI/QuizzesList/components/QuizComponent.dart';
+import 'package:percent_indicator/percent_indicator.dart';
+
 import '../../../Values/values.dart';
 import '../Controller/TimelineController.dart';
-import 'package:percent_indicator/percent_indicator.dart';
-import 'dart:math' show pi, sin;
 
 class Timeline extends StatelessWidget {
   final TimelineController controller = Get.put(TimelineController());
@@ -14,18 +16,51 @@ class Timeline extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Timeline'),
-        centerTitle: true,
+        title: const Text('Map',
+            style: TextStyle(fontSize: 24, color: Colors.white)),
+        backgroundColor: MyColor.bgBlack10,
+        leading: GestureDetector(
+          onTap: () {
+            Navigator.of(context).pop();
+          },
+          child: SizedBox(
+            height: Sizes.HEIGHT_10,
+            width: Sizes.WIDTH_10,
+            child: Padding(
+              padding: const EdgeInsets.all(12.0),
+              child: Image(
+                image: AssetImage(
+                  'assets/arrow.png',
+                ),
+                color: Colors.white,
+                height: Sizes.HEIGHT_10,
+                width: Sizes.WIDTH_10,
+              ),
+            ),
+          ),
+        ),
       ),
-      body: Obx(() {
-        if (controller.isLoading.value) {
-          return Center(child: CircularProgressIndicator());
-        } else {
-          return ListView(
-            children: _buildFilteredLevelCards(),
-          );
-        }
-      }),
+      body: Container(
+        decoration: BoxDecoration(
+          gradient: LinearGradient(
+            begin: Alignment.centerLeft,
+            end: Alignment.centerRight,
+            colors: [
+              Color(0xFF414345), // #414345
+              Color(0xFF232526), // #232526
+            ],
+          ),
+        ),
+        child: Obx(() {
+          if (controller.isLoading.value) {
+            return Center(child: CircularProgressIndicator());
+          } else {
+            return ListView(
+              children: _buildFilteredLevelCards(),
+            );
+          }
+        }),
+      ),
     );
   }
 
@@ -81,7 +116,7 @@ class Timeline extends StatelessWidget {
         shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(20)),
         margin: EdgeInsets.all(16),
         child: Container(
-          height: Sizes.HEIGHT_220,
+          height: Sizes.HEIGHT_160,
           decoration: BoxDecoration(
             borderRadius: BorderRadius.circular(20),
             image: DecorationImage(
@@ -95,75 +130,101 @@ class Timeline extends StatelessWidget {
             ),
           ),
           child: Padding(
-            padding: EdgeInsets.all(20),
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
+            padding: EdgeInsets.all(16),
+            child: Row(
+              // crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                Column(
+                  // mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                   children: [
-                    Expanded(
+                    Container(
+                      padding:
+                          EdgeInsets.symmetric(vertical: 20, horizontal: 12),
                       child: Text(
                         level,
                         style: TextStyle(
                           fontSize: 24,
                           fontWeight: FontWeight.bold,
-                          color:
-                              level == 'Madhyam' ? Colors.blue : Colors.white,
+                          color: level == 'Madhyam'
+                              ? MyColor.darkBlue
+                              : Colors.white,
                         ),
                       ),
                     ),
-                    ShakeWidget(
-                      child: Icon(
-                        isLocked ? Icons.lock : Icons.lock_open,
-                        color: level == 'Madhyam' ? Colors.blue : Colors.white,
-                        size: 28,
+                    Container(
+                      decoration: BoxDecoration(
+                        boxShadow: [
+                          BoxShadow(
+                            color: Colors.black.withOpacity(0.5),
+                            spreadRadius: 1,
+                            blurRadius: 15,
+                            offset: Offset(0, 3), // changes position of shadow
+                          ),
+                        ],
+                      ),
+                      child: ShakeWidget(
+                        child: Icon(
+                          isLocked ? Icons.lock : Icons.lock_open,
+                          color: level == 'Madhyam'
+                              ? MyColor.darkBlue
+                              : Colors.white,
+                          size: 28,
+                        ),
                       ),
                     ),
                   ],
                 ),
-                Expanded(
-                  child: Center(
-                    child: CircularPercentIndicator(
-                      radius: 60.0,
-                      lineWidth: 10.0,
-                      percent: double.parse(
-                              controller.getCompletionPercentage(level)) /
-                          100,
-                      center: Text(
-                        "${controller.getCompletionPercentage(level)}%",
-                        style: TextStyle(
-                          fontWeight: FontWeight.bold,
-                          fontSize: 20,
-                          color:
+                Column(
+                  children: [
+                    Container(
+                      child: Center(
+                        child: CircularPercentIndicator(
+                          radius: 45.0,
+                          lineWidth: 10.0,
+                          percent: double.parse(
+                                  controller.getCompletionPercentage(level)) /
+                              100,
+                          center: Text(
+                            "${controller.getCompletionPercentage(level)}%",
+                            style: TextStyle(
+                              fontWeight: FontWeight.bold,
+                              fontSize: 20,
+                              color: level == 'Madhyam'
+                                  ? MyColor.darkBlue
+                                  : Colors.white,
+                            ),
+                          ),
+                          progressColor:
                               level == 'Madhyam' ? Colors.blue : Colors.white,
+                          backgroundColor: level == 'Madhyam'
+                              ? Colors.black.withOpacity(0.2)
+                              : Colors.black.withOpacity(0.2),
+                          circularStrokeCap: CircularStrokeCap.round,
+                          animation: true,
+                          animationDuration: 1000,
                         ),
                       ),
-                      progressColor:
-                          level == 'Madhyam' ? Colors.blue : Colors.white,
-                      backgroundColor: level == 'Madhyam'
-                          ? Colors.blue.withOpacity(0.2)
-                          : Colors.white.withOpacity(0.2),
-                      circularStrokeCap: CircularStrokeCap.round,
-                      animation: true,
-                      animationDuration: 1000,
                     ),
-                  ),
-                ),
-                Container(
-                  padding: EdgeInsets.all(6),
-                  // width: Sizes.WIDTH_400,
-                  child: Center(
-                    child: Text(
-                      isLocked ? 'Locked' : 'Tap to start',
-                      style: TextStyle(
-                        fontSize: 16,
-                        color: level == 'Madhyam' ? Colors.blue : Colors.white,
-                        fontStyle: FontStyle.italic,
+                    Expanded(
+                      // height: Sizes.HEIGHT_,
+                      // padding: EdgeInsets.all(6),
+                      // width: Sizes.WIDTH_400,
+                      child: Center(
+                        child: Text(
+                          isLocked ? 'Locked' : 'Tap to start',
+                          style: TextStyle(
+                            fontSize: 16,
+                            fontWeight: FontWeight.w500,
+                            color: level == 'Madhyam'
+                                ? MyColor.darkBlue
+                                : Colors.white,
+                            // fontStyle: FontStyle.italic,
+                          ),
+                          textAlign: TextAlign.center,
+                        ),
                       ),
-                      textAlign: TextAlign.center,
                     ),
-                  ),
+                  ],
                 ),
               ],
             ),

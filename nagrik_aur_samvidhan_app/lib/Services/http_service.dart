@@ -6,7 +6,9 @@ import 'secured_storage.dart';
 
 class HttpService extends GetxService {
   late Dio _dio;
-  final String baseUrl = AppUrls.baseUrl; // Replace with your actual base URL
+  late Dio _aiDio;
+  final String baseUrl = AppUrls.baseUrl;
+  final String aiBaseUrl = AppUrls.AiBotUrl; // Add this new AI base URL
   late final SecureStorage _secureStorage;
 
   @override
@@ -15,6 +17,11 @@ class HttpService extends GetxService {
     _secureStorage = Get.find<SecureStorage>();
     _dio = Dio(BaseOptions(
       baseUrl: baseUrl,
+      connectTimeout: const Duration(seconds: 5),
+      receiveTimeout: const Duration(seconds: 3),
+    ));
+    _aiDio = Dio(BaseOptions(
+      baseUrl: aiBaseUrl,
       connectTimeout: const Duration(seconds: 5),
       receiveTimeout: const Duration(seconds: 3),
     ));
@@ -43,11 +50,25 @@ class HttpService extends GetxService {
     }
   }
 
+  Future<Map<String, dynamic>> authenticatedPost(String path,
+      {required Map<String, dynamic> data, bool useAiUrl = false}) async {
+    return authenticatedRequest(path,
+        method: 'POST', data: data, useAiUrl: useAiUrl);
+  }
+
+  Future<Map<String, dynamic>> authenticatedPut(String path,
+      {required Map<String, dynamic> body}) async {
+    return authenticatedRequest(path, method: 'PUT', data: body);
+  }
+
   Future<Map<String, dynamic>> authenticatedRequest(String path,
-      {String method = 'GET', Map<String, dynamic>? data}) async {
+      {String method = 'GET',
+      Map<String, dynamic>? data,
+      bool useAiUrl = false}) async {
     try {
       final token = await _secureStorage.getToken();
-      final response = await _dio.request(
+      final dio = useAiUrl ? _aiDio : _dio;
+      final response = await dio.request(
         path,
         options: Options(
           method: method,
@@ -61,11 +82,6 @@ class HttpService extends GetxService {
     } on DioError catch (e) {
       throw e.message ?? 'An error occurred';
     }
-  }
-
-  Future<Map<String, dynamic>> authenticatedPut(String path,
-      {required Map<String, dynamic> body}) async {
-    return authenticatedRequest(path, method: 'PUT', data: body);
   }
 
   Future<List<dynamic>> authenticatedRequestGeneral(String path,
