@@ -1,0 +1,334 @@
+2024-09-13 18:03:12,338 - __main__ - INFO - Successfully connected to MongoDB
+2024-09-13 18:03:12,338 - __main__ - INFO - Starting to load and process PDFs
+2024-09-13 18:04:14,314 - faiss.loader - INFO - Loading faiss with AVX2 support.
+2024-09-13 18:04:14,337 - faiss.loader - INFO - Successfully loaded faiss with AVX2 support.
+2024-09-13 18:04:14,398 - __main__ - INFO - Successfully loaded and processed PDFs
+2024-09-13 18:04:14,415 - __main__ - INFO - Starting the FastAPI application
+2024-09-13 18:04:17,534 - __main__ - INFO - Received request to generate case study for place: Delhi
+2024-09-13 18:04:17,534 - __main__ - INFO - Making request to News API with params: {'q': 'crimes in Delhi', 'from': '2024-09-07', 'to': '2024-09-13', 'pageSize': 50, 'apiKey': '4f316b8b0cca48c0a71cdb75fe9729aa'}
+2024-09-13 18:04:18,544 - __main__ - INFO - Selected article: 'Protests won't stop': Bengal IMA defies SC order over RG Kar rape case
+2024-09-13 18:04:18,545 - __main__ - INFO - Loading news data from URL: https://www.business-standard.com/india-news/protests-won-t-stop-bengal-ima-defies-sc-order-over-rg-kar-rape-case-124091000164_1.html
+2024-09-13 18:04:21,053 - __main__ - INFO - Retrieving relevant context from vector store
+2024-09-13 18:04:21,499 - __main__ - INFO - Generating case study content
+2024-09-13 18:04:27,551 - __main__ - ERROR - JSON decoding error for case study data: Invalid control character at: line 3 column 793 (char 877)
+2024-09-13 18:04:32,587 - __main__ - INFO - Received request to generate case study for place: Delhi
+2024-09-13 18:04:32,588 - __main__ - INFO - Making request to News API with params: {'q': 'crimes in Delhi', 'from': '2024-09-07', 'to': '2024-09-13', 'pageSize': 50, 'apiKey': '4f316b8b0cca48c0a71cdb75fe9729aa'}
+2024-09-13 18:04:33,840 - __main__ - INFO - Selected article: "Shameful": Rahul Gandhi, Priyanka On Attack Of Army Officers, Rape Of Friend
+2024-09-13 18:04:33,840 - __main__ - INFO - Loading news data from URL: https://www.ndtv.com/india-news/rahul-gandhi-priyanka-gandhi-madhya-pradesh-army-officers-attacked-woman-friend-raped-6547886
+2024-09-13 18:04:34,460 - __main__ - INFO - Retrieving relevant context from vector store
+2024-09-13 18:04:34,908 - __main__ - INFO - Generating case study content
+2024-09-13 18:04:40,210 - __main__ - INFO - Retrieving relevant context for questions
+2024-09-13 18:04:40,722 - __main__ - INFO - Generating questions
+2024-09-13 18:04:45,917 - __main__ - ERROR - JSON decoding error for questions data: Expecting ',' delimiter: line 24 column 5 (char 1376)
+2024-09-13 18:05:09,703 - __main__ - INFO - Received request to generate case study for place: Delhi
+2024-09-13 18:05:09,703 - __main__ - INFO - Making request to News API with params: {'q': 'crimes in Delhi', 'from': '2024-09-07', 'to': '2024-09-13', 'pageSize': 50, 'apiKey': '4f316b8b0cca48c0a71cdb75fe9729aa'}
+2024-09-13 18:05:11,064 - __main__ - INFO - Selected article: Streets to global stage: Kolkata rape-murder outrage intensifies a month on
+2024-09-13 18:05:11,065 - __main__ - INFO - Loading news data from URL: https://www.business-standard.com/india-news/streets-to-global-stage-kolkata-rape-murder-outrage-intensifies-a-month-on-124090900320_1.html
+2024-09-13 18:05:11,189 - __main__ - INFO - Retrieving relevant context from vector store
+2024-09-13 18:05:11,746 - __main__ - INFO - Generating case study content
+2024-09-13 18:05:17,666 - __main__ - INFO - Retrieving relevant context for questions
+2024-09-13 18:05:18,178 - __main__ - INFO - Generating questions
+2024-09-13 18:05:23,996 - __main__ - INFO - Inserting case study into MongoDB
+2024-09-13 18:05:24,051 - __main__ - INFO - Successfully inserted case study with ID: 66e4318b2c1c0ce6d9f368d4
+2024-09-13 18:10:09,615 - __main__ - INFO - Successfully connected to MongoDB
+2024-09-13 18:10:09,616 - __main__ - INFO - Starting to load and process PDFs
+2024-09-13 18:11:10,816 - faiss.loader - INFO - Loading faiss with AVX2 support.
+2024-09-13 18:11:10,843 - faiss.loader - INFO - Successfully loaded faiss with AVX2 support.
+2024-09-13 18:11:10,902 - __main__ - INFO - Successfully loaded and processed PDFs
+2024-09-13 18:11:10,920 - __main__ - INFO - Starting the FastAPI application
+2024-09-13 18:11:47,792 - __main__ - INFO - Received request to generate case study for place: Pune
+2024-09-13 18:11:47,792 - __main__ - INFO - Making request to News API with params: {'q': 'crimes in Pune', 'from': '2024-09-07', 'to': '2024-09-13', 'pageSize': 50, 'apiKey': '4f316b8b0cca48c0a71cdb75fe9729aa'}
+2024-09-13 18:11:48,443 - __main__ - WARNING - No relevant articles found after filtering
+2024-09-13 18:11:51,359 - __main__ - INFO - Received request to generate case study for place: Pune
+2024-09-13 18:11:51,359 - __main__ - INFO - Making request to News API with params: {'q': 'crimes in Pune', 'from': '2024-09-07', 'to': '2024-09-13', 'pageSize': 50, 'apiKey': '4f316b8b0cca48c0a71cdb75fe9729aa'}
+2024-09-13 18:11:52,495 - __main__ - WARNING - No relevant articles found after filtering
+2024-09-13 18:12:00,691 - __main__ - INFO - Received request to generate case study for place: Gujrat
+2024-09-13 18:12:00,691 - __main__ - INFO - Making request to News API with params: {'q': 'crimes in Gujrat', 'from': '2024-09-07', 'to': '2024-09-13', 'pageSize': 50, 'apiKey': '4f316b8b0cca48c0a71cdb75fe9729aa'}
+2024-09-13 18:12:02,207 - __main__ - WARNING - No articles found in the API response
+2024-09-13 18:12:17,828 - __main__ - INFO - Received request to generate case study for place: Kolkata
+2024-09-13 18:12:17,828 - __main__ - INFO - Making request to News API with params: {'q': 'crimes in Kolkata', 'from': '2024-09-07', 'to': '2024-09-13', 'pageSize': 50, 'apiKey': '4f316b8b0cca48c0a71cdb75fe9729aa'}
+2024-09-13 18:12:18,200 - __main__ - INFO - Selected article: 'Protests won't stop': Bengal IMA defies SC order over RG Kar rape case
+2024-09-13 18:12:18,200 - __main__ - INFO - Loading news data from URL: https://www.business-standard.com/india-news/protests-won-t-stop-bengal-ima-defies-sc-order-over-rg-kar-rape-case-124091000164_1.html
+2024-09-13 18:12:20,379 - __main__ - INFO - Retrieving relevant context from vector store
+2024-09-13 18:12:20,828 - __main__ - INFO - Generating case study content
+2024-09-13 18:12:26,690 - __main__ - ERROR - JSON decoding error for case study data: Invalid control character at: line 3 column 593 (char 687)
+2024-09-13 18:12:29,670 - __main__ - INFO - Received request to generate case study for place: Kolkata
+2024-09-13 18:12:29,670 - __main__ - INFO - Making request to News API with params: {'q': 'crimes in Kolkata', 'from': '2024-09-07', 'to': '2024-09-13', 'pageSize': 50, 'apiKey': '4f316b8b0cca48c0a71cdb75fe9729aa'}
+2024-09-13 18:12:31,597 - __main__ - INFO - Selected article: "Shameful": Rahul Gandhi, Priyanka On Attack Of Army Officers, Rape Of Friend
+2024-09-13 18:12:31,597 - __main__ - INFO - Loading news data from URL: https://www.ndtv.com/india-news/rahul-gandhi-priyanka-gandhi-madhya-pradesh-army-officers-attacked-woman-friend-raped-6547886
+2024-09-13 18:12:32,039 - __main__ - INFO - Retrieving relevant context from vector store
+2024-09-13 18:12:32,460 - __main__ - INFO - Generating case study content
+2024-09-13 18:12:36,942 - __main__ - ERROR - JSON decoding error for case study data: Invalid control character at: line 3 column 410 (char 519)
+2024-09-13 18:12:39,470 - __main__ - INFO - Received request to generate case study for place: Kolkata
+2024-09-13 18:12:39,470 - __main__ - INFO - Making request to News API with params: {'q': 'crimes in Kolkata', 'from': '2024-09-07', 'to': '2024-09-13', 'pageSize': 50, 'apiKey': '4f316b8b0cca48c0a71cdb75fe9729aa'}
+2024-09-13 18:12:40,237 - __main__ - INFO - Selected article: "Shameful": Rahul Gandhi, Priyanka On Attack Of Army Officers, Rape Of Friend
+2024-09-13 18:12:40,237 - __main__ - INFO - Loading news data from URL: https://www.ndtv.com/india-news/rahul-gandhi-priyanka-gandhi-madhya-pradesh-army-officers-attacked-woman-friend-raped-6547886
+2024-09-13 18:12:41,150 - __main__ - INFO - Retrieving relevant context from vector store
+2024-09-13 18:12:41,620 - __main__ - INFO - Generating case study content
+2024-09-13 18:12:45,761 - __main__ - INFO - Retrieving relevant context for questions
+2024-09-13 18:12:46,381 - __main__ - INFO - Generating questions
+2024-09-13 18:12:50,798 - __main__ - ERROR - JSON decoding error for questions data: Expecting ',' delimiter: line 48 column 5 (char 3308)
+2024-09-13 18:12:52,934 - __main__ - INFO - Received request to generate case study for place: Kolkata
+2024-09-13 18:12:52,934 - __main__ - INFO - Making request to News API with params: {'q': 'crimes in Kolkata', 'from': '2024-09-07', 'to': '2024-09-13', 'pageSize': 50, 'apiKey': '4f316b8b0cca48c0a71cdb75fe9729aa'}
+2024-09-13 18:12:53,570 - __main__ - INFO - Selected article: Streets to global stage: Kolkata rape-murder outrage intensifies a month on
+2024-09-13 18:12:53,570 - __main__ - INFO - Loading news data from URL: https://www.business-standard.com/india-news/streets-to-global-stage-kolkata-rape-murder-outrage-intensifies-a-month-on-124090900320_1.html
+2024-09-13 18:12:53,885 - __main__ - INFO - Retrieving relevant context from vector store
+2024-09-13 18:12:54,363 - __main__ - INFO - Generating case study content
+2024-09-13 18:12:58,156 - __main__ - INFO - Retrieving relevant context for questions
+2024-09-13 18:12:58,596 - __main__ - INFO - Generating questions
+2024-09-13 18:13:05,626 - __main__ - INFO - Inserting case study into MongoDB
+2024-09-13 18:13:05,889 - __main__ - INFO - Successfully inserted case study with ID: 66e43359c15655c05a39670a
+2024-09-13 19:01:40,032 - __main__ - INFO - Successfully connected to MongoDB
+2024-09-13 19:01:40,032 - __main__ - INFO - Starting to load and process PDFs
+2024-09-13 19:02:41,657 - faiss.loader - INFO - Loading faiss with AVX2 support.
+2024-09-13 19:02:41,691 - faiss.loader - INFO - Successfully loaded faiss with AVX2 support.
+2024-09-13 19:02:41,749 - __main__ - INFO - Successfully loaded and processed PDFs
+2024-09-13 19:02:41,768 - __main__ - INFO - Starting the FastAPI application
+2024-09-13 19:03:00,639 - __main__ - INFO - Received request to generate case study for place: Kolkata
+2024-09-13 19:03:00,639 - __main__ - INFO - Making request to News API with params: {'q': 'news in Kolkata', 'from': '2024-09-07', 'to': '2024-09-13', 'pageSize': 50, 'apiKey': '4f316b8b0cca48c0a71cdb75fe9729aa'}
+2024-09-13 19:03:01,569 - __main__ - ERROR - Unexpected error in get_news: can only concatenate str (not "list") to str
+Traceback (most recent call last):
+  File "/home/hereisswapnil/Desktop/SIH/NagrikAurSamvidhan-Backend/AIGeneration/main.py", line 148, in get_news
+    print("\n\n" + filteredArticles + "\n\n")
+          ~~~~~~~^~~~~~~~~~~~~~~~~~
+TypeError: can only concatenate str (not "list") to str
+2024-09-13 19:03:06,482 - __main__ - INFO - Received request to generate case study for place: Kolkata
+2024-09-13 19:03:06,482 - __main__ - INFO - Making request to News API with params: {'q': 'news in Kolkata', 'from': '2024-09-07', 'to': '2024-09-13', 'pageSize': 50, 'apiKey': '4f316b8b0cca48c0a71cdb75fe9729aa'}
+2024-09-13 19:03:07,399 - __main__ - ERROR - Unexpected error in get_news: can only concatenate str (not "list") to str
+Traceback (most recent call last):
+  File "/home/hereisswapnil/Desktop/SIH/NagrikAurSamvidhan-Backend/AIGeneration/main.py", line 148, in get_news
+    print("\n\n" + filteredArticles + "\n\n")
+          ~~~~~~~^~~~~~~~~~~~~~~~~~
+TypeError: can only concatenate str (not "list") to str
+2024-09-13 19:03:55,758 - __main__ - INFO - Successfully connected to MongoDB
+2024-09-13 19:03:55,758 - __main__ - INFO - Starting to load and process PDFs
+2024-09-13 19:04:57,974 - faiss.loader - INFO - Loading faiss with AVX2 support.
+2024-09-13 19:04:57,997 - faiss.loader - INFO - Successfully loaded faiss with AVX2 support.
+2024-09-13 19:04:58,055 - __main__ - INFO - Successfully loaded and processed PDFs
+2024-09-13 19:04:58,068 - __main__ - INFO - Starting the FastAPI application
+2024-09-13 19:05:26,655 - __main__ - INFO - Received request to generate case study for place: Kolkata
+2024-09-13 19:05:26,655 - __main__ - INFO - Making request to News API with params: {'q': 'news in Kolkata', 'from': '2024-09-07', 'to': '2024-09-13', 'pageSize': 50, 'apiKey': '4f316b8b0cca48c0a71cdb75fe9729aa'}
+2024-09-13 19:06:02,697 - __main__ - INFO - Successfully connected to MongoDB
+2024-09-13 19:06:02,697 - __main__ - INFO - Starting to load and process PDFs
+2024-09-13 19:07:05,753 - faiss.loader - INFO - Loading faiss with AVX2 support.
+2024-09-13 19:07:05,774 - faiss.loader - INFO - Successfully loaded faiss with AVX2 support.
+2024-09-13 19:07:05,830 - __main__ - INFO - Successfully loaded and processed PDFs
+2024-09-13 19:07:05,842 - __main__ - INFO - Starting the FastAPI application
+2024-09-13 19:07:14,000 - __main__ - INFO - Received request to generate case study for place: Kolkata
+2024-09-13 19:07:14,000 - __main__ - INFO - Making request to News API with params: {'q': 'news in Kolkata', 'from': '2024-09-07', 'to': '2024-09-13', 'pageSize': 50, 'apiKey': '4f316b8b0cca48c0a71cdb75fe9729aa'}
+2024-09-13 19:07:14,602 - __main__ - INFO - Selected article: Kolkata News: Supreme Court to discuss R.G. Kar Medical College & Hospital rape and murder case
+2024-09-13 19:07:14,602 - __main__ - INFO - Loading news data from URL: https://economictimes.indiatimes.com/news/india/kolkata-news-supreme-court-to-discuss-r-g-kar-medical-college-hospital-rape-and-murder-case/videoshow/113182108.cms
+2024-09-13 19:07:17,318 - __main__ - INFO - Retrieving relevant context from vector store
+2024-09-13 19:07:17,786 - __main__ - INFO - Generating case study content
+2024-09-13 19:07:24,046 - __main__ - INFO - Retrieving relevant context for questions
+2024-09-13 19:07:24,616 - __main__ - INFO - Generating questions
+2024-09-13 19:07:43,707 - __main__ - INFO - Received request to generate case study for place: Kanpur
+2024-09-13 19:07:43,707 - __main__ - INFO - Making request to News API with params: {'q': 'news in Kanpur', 'from': '2024-09-07', 'to': '2024-09-13', 'pageSize': 50, 'apiKey': '4f316b8b0cca48c0a71cdb75fe9729aa'}
+2024-09-13 19:07:44,977 - __main__ - WARNING - No relevant articles found after filtering
+2024-09-13 19:07:46,966 - __main__ - INFO - Received request to generate case study for place: Kanpur
+2024-09-13 19:07:46,966 - __main__ - INFO - Making request to News API with params: {'q': 'news in Kanpur', 'from': '2024-09-07', 'to': '2024-09-13', 'pageSize': 50, 'apiKey': '4f316b8b0cca48c0a71cdb75fe9729aa'}
+2024-09-13 19:07:47,439 - __main__ - WARNING - No relevant articles found after filtering
+2024-09-13 19:07:52,258 - __main__ - INFO - Received request to generate case study for place: Pune
+2024-09-13 19:07:52,258 - __main__ - INFO - Making request to News API with params: {'q': 'news in Pune', 'from': '2024-09-07', 'to': '2024-09-13', 'pageSize': 50, 'apiKey': '4f316b8b0cca48c0a71cdb75fe9729aa'}
+2024-09-13 19:07:53,002 - __main__ - WARNING - No relevant articles found after filtering
+2024-09-13 19:08:03,204 - __main__ - INFO - Received request to generate case study for place: Gujrat
+2024-09-13 19:08:03,204 - __main__ - INFO - Making request to News API with params: {'q': 'news in Gujrat', 'from': '2024-09-07', 'to': '2024-09-13', 'pageSize': 50, 'apiKey': '4f316b8b0cca48c0a71cdb75fe9729aa'}
+2024-09-13 19:08:03,753 - __main__ - WARNING - No articles found in the API response
+2024-09-13 19:08:12,290 - __main__ - INFO - Received request to generate case study for place: India
+2024-09-13 19:08:12,290 - __main__ - INFO - Making request to News API with params: {'q': 'news in India', 'from': '2024-09-07', 'to': '2024-09-13', 'pageSize': 50, 'apiKey': '4f316b8b0cca48c0a71cdb75fe9729aa'}
+2024-09-13 19:08:13,378 - __main__ - INFO - Selected article: India’s Manipur imposes curfew, cuts internet to quell escalating violence
+2024-09-13 19:08:13,378 - __main__ - INFO - Loading news data from URL: https://www.aljazeera.com/news/2024/9/10/indias-manipur-imposes-curfew-cuts-internet-to-quell-escalating-violence
+2024-09-13 19:08:14,763 - __main__ - INFO - Retrieving relevant context from vector store
+2024-09-13 19:08:15,202 - __main__ - INFO - Generating case study content
+2024-09-13 19:08:20,239 - __main__ - ERROR - JSON decoding error for case study data: Invalid control character at: line 3 column 426 (char 544)
+2024-09-13 19:08:24,202 - __main__ - INFO - Received request to generate case study for place: India
+2024-09-13 19:08:24,202 - __main__ - INFO - Making request to News API with params: {'q': 'news in India', 'from': '2024-09-07', 'to': '2024-09-13', 'pageSize': 50, 'apiKey': '4f316b8b0cca48c0a71cdb75fe9729aa'}
+2024-09-13 19:08:25,708 - __main__ - INFO - Selected article: At least five killed as ethnic violence flares in India’s Manipur
+2024-09-13 19:08:25,708 - __main__ - INFO - Loading news data from URL: https://www.aljazeera.com/news/2024/9/7/ethnic-violence-flares-in-indias-manipur
+2024-09-13 19:08:26,350 - __main__ - INFO - Retrieving relevant context from vector store
+2024-09-13 19:08:26,795 - __main__ - INFO - Generating case study content
+2024-09-13 19:08:32,624 - __main__ - ERROR - JSON decoding error for case study data: Invalid control character at: line 3 column 415 (char 516)
+2024-09-13 19:08:55,933 - __main__ - INFO - Received request to generate case study for place: India
+2024-09-13 19:08:55,933 - __main__ - INFO - Making request to News API with params: {'q': 'news in India', 'from': '2024-09-07', 'to': '2024-09-13', 'pageSize': 50, 'apiKey': '4f316b8b0cca48c0a71cdb75fe9729aa'}
+2024-09-13 19:08:57,620 - __main__ - INFO - Selected article: At least five killed as ethnic violence flares in India’s Manipur
+2024-09-13 19:08:57,620 - __main__ - INFO - Loading news data from URL: https://www.aljazeera.com/news/2024/9/7/ethnic-violence-flares-in-indias-manipur
+2024-09-13 19:08:58,214 - __main__ - INFO - Retrieving relevant context from vector store
+2024-09-13 19:08:59,249 - __main__ - INFO - Generating case study content
+2024-09-13 19:09:04,171 - __main__ - ERROR - JSON decoding error for case study data: Invalid control character at: line 3 column 440 (char 527)
+2024-09-13 19:09:07,090 - __main__ - INFO - Received request to generate case study for place: India
+2024-09-13 19:09:07,090 - __main__ - INFO - Making request to News API with params: {'q': 'news in India', 'from': '2024-09-07', 'to': '2024-09-13', 'pageSize': 50, 'apiKey': '4f316b8b0cca48c0a71cdb75fe9729aa'}
+2024-09-13 19:09:08,874 - __main__ - INFO - Selected article: At least five killed as ethnic violence flares in India’s Manipur
+2024-09-13 19:09:08,875 - __main__ - INFO - Loading news data from URL: https://www.aljazeera.com/news/2024/9/7/ethnic-violence-flares-in-indias-manipur
+2024-09-13 19:09:09,162 - __main__ - INFO - Retrieving relevant context from vector store
+2024-09-13 19:09:09,613 - __main__ - INFO - Generating case study content
+2024-09-13 19:09:14,404 - __main__ - ERROR - JSON decoding error for case study data: Invalid control character at: line 3 column 440 (char 550)
+2024-09-13 19:10:28,254 - __main__ - INFO - Received request to generate case study for place: India
+2024-09-13 19:10:28,254 - __main__ - INFO - Making request to News API with params: {'q': 'news in India', 'from': '2024-09-07', 'to': '2024-09-13', 'pageSize': 50, 'apiKey': '4f316b8b0cca48c0a71cdb75fe9729aa'}
+2024-09-13 19:10:29,778 - __main__ - INFO - Selected article: At least five killed as ethnic violence flares in India’s Manipur
+2024-09-13 19:10:29,778 - __main__ - INFO - Loading news data from URL: https://www.aljazeera.com/news/2024/9/7/ethnic-violence-flares-in-indias-manipur
+2024-09-13 19:10:30,560 - __main__ - INFO - Retrieving relevant context from vector store
+2024-09-13 19:10:31,005 - __main__ - INFO - Generating case study content
+2024-09-13 19:10:35,539 - __main__ - ERROR - JSON decoding error for case study data: Invalid control character at: line 3 column 427 (char 533)
+2024-09-13 19:12:30,960 - __main__ - INFO - Successfully connected to MongoDB
+2024-09-13 19:12:30,960 - __main__ - INFO - Starting to load and process PDFs
+2024-09-13 19:13:33,899 - faiss.loader - INFO - Loading faiss with AVX2 support.
+2024-09-13 19:13:33,936 - faiss.loader - INFO - Successfully loaded faiss with AVX2 support.
+2024-09-13 19:13:34,000 - __main__ - INFO - Successfully loaded and processed PDFs
+2024-09-13 19:13:34,016 - __main__ - INFO - Starting the FastAPI application
+2024-09-13 19:14:07,652 - __main__ - INFO - Received request to generate case study for place: India
+2024-09-13 19:14:07,653 - __main__ - INFO - Making request to News API with params: {'q': 'news in India', 'from': '2024-09-07', 'to': '2024-09-13', 'pageSize': 50, 'apiKey': '4f316b8b0cca48c0a71cdb75fe9729aa'}
+2024-09-13 19:14:08,660 - __main__ - INFO - Selected article: At least five killed as ethnic violence flares in India’s Manipur
+2024-09-13 19:14:08,660 - __main__ - INFO - Loading news data from URL: https://www.aljazeera.com/news/2024/9/7/ethnic-violence-flares-in-indias-manipur
+2024-09-13 19:14:10,985 - __main__ - INFO - Retrieving relevant context from vector store
+2024-09-13 19:14:11,440 - __main__ - INFO - Generating case study content
+2024-09-13 19:14:17,516 - __main__ - INFO - Retrieving relevant context for questions
+2024-09-13 19:14:18,027 - __main__ - INFO - Generating questions
+2024-09-13 19:15:01,760 - __main__ - INFO - Received request to generate case study for place: India
+2024-09-13 19:15:01,760 - __main__ - INFO - Making request to News API with params: {'q': 'news in India', 'from': '2024-09-07', 'to': '2024-09-13', 'pageSize': 50, 'apiKey': '4f316b8b0cca48c0a71cdb75fe9729aa'}
+2024-09-13 19:15:02,208 - __main__ - INFO - Selected article: At least five killed as ethnic violence flares in India’s Manipur
+2024-09-13 19:15:02,208 - __main__ - INFO - Loading news data from URL: https://www.aljazeera.com/news/2024/9/7/ethnic-violence-flares-in-indias-manipur
+2024-09-13 19:15:02,501 - __main__ - INFO - Retrieving relevant context from vector store
+2024-09-13 19:15:02,938 - __main__ - INFO - Generating case study content
+2024-09-13 19:15:06,975 - __main__ - ERROR - JSON decoding error for case study data: Invalid control character at: line 3 column 449 (char 547)
+2024-09-13 19:15:11,408 - __main__ - INFO - Received request to generate case study for place: India
+2024-09-13 19:15:11,409 - __main__ - INFO - Making request to News API with params: {'q': 'news in India', 'from': '2024-09-07', 'to': '2024-09-13', 'pageSize': 50, 'apiKey': '4f316b8b0cca48c0a71cdb75fe9729aa'}
+2024-09-13 19:15:13,014 - __main__ - INFO - Selected article: At least five killed as ethnic violence flares in India’s Manipur
+2024-09-13 19:15:13,014 - __main__ - INFO - Loading news data from URL: https://www.aljazeera.com/news/2024/9/7/ethnic-violence-flares-in-indias-manipur
+2024-09-13 19:15:13,511 - __main__ - INFO - Retrieving relevant context from vector store
+2024-09-13 19:15:14,036 - __main__ - INFO - Generating case study content
+2024-09-13 19:15:20,282 - __main__ - ERROR - JSON decoding error for case study data: Invalid control character at: line 3 column 590 (char 698)
+2024-09-13 19:15:22,235 - __main__ - INFO - Received request to generate case study for place: India
+2024-09-13 19:15:22,235 - __main__ - INFO - Making request to News API with params: {'q': 'news in India', 'from': '2024-09-07', 'to': '2024-09-13', 'pageSize': 50, 'apiKey': '4f316b8b0cca48c0a71cdb75fe9729aa'}
+2024-09-13 19:15:22,849 - __main__ - INFO - Selected article: At least five killed as ethnic violence flares in India’s Manipur
+2024-09-13 19:15:22,849 - __main__ - INFO - Loading news data from URL: https://www.aljazeera.com/news/2024/9/7/ethnic-violence-flares-in-indias-manipur
+2024-09-13 19:15:23,516 - __main__ - INFO - Retrieving relevant context from vector store
+2024-09-13 19:15:24,179 - __main__ - INFO - Generating case study content
+2024-09-13 19:15:28,269 - __main__ - ERROR - JSON decoding error for case study data: Invalid control character at: line 3 column 442 (char 531)
+2024-09-13 19:15:30,767 - __main__ - INFO - Received request to generate case study for place: India
+2024-09-13 19:15:30,767 - __main__ - INFO - Making request to News API with params: {'q': 'news in India', 'from': '2024-09-07', 'to': '2024-09-13', 'pageSize': 50, 'apiKey': '4f316b8b0cca48c0a71cdb75fe9729aa'}
+2024-09-13 19:15:32,468 - __main__ - INFO - Selected article: India’s Manipur imposes curfew, cuts internet to quell escalating violence
+2024-09-13 19:15:32,469 - __main__ - INFO - Loading news data from URL: https://www.aljazeera.com/news/2024/9/10/indias-manipur-imposes-curfew-cuts-internet-to-quell-escalating-violence
+2024-09-13 19:15:33,101 - __main__ - INFO - Retrieving relevant context from vector store
+2024-09-13 19:15:33,541 - __main__ - INFO - Generating case study content
+2024-09-13 19:15:38,509 - __main__ - INFO - Retrieving relevant context for questions
+2024-09-13 19:15:39,188 - __main__ - INFO - Generating questions
+2024-09-13 19:15:45,268 - __main__ - ERROR - JSON decoding error for questions data: Expecting ',' delimiter: line 60 column 5 (char 5479)
+2024-09-13 19:15:48,014 - __main__ - INFO - Received request to generate case study for place: India
+2024-09-13 19:15:48,015 - __main__ - INFO - Making request to News API with params: {'q': 'news in India', 'from': '2024-09-07', 'to': '2024-09-13', 'pageSize': 50, 'apiKey': '4f316b8b0cca48c0a71cdb75fe9729aa'}
+2024-09-13 19:15:48,727 - __main__ - INFO - Selected article: India’s Manipur imposes curfew, cuts internet to quell escalating violence
+2024-09-13 19:15:48,727 - __main__ - INFO - Loading news data from URL: https://www.aljazeera.com/news/2024/9/10/indias-manipur-imposes-curfew-cuts-internet-to-quell-escalating-violence
+2024-09-13 19:15:49,421 - __main__ - INFO - Retrieving relevant context from vector store
+2024-09-13 19:15:50,654 - __main__ - INFO - Generating case study content
+2024-09-13 19:15:55,305 - __main__ - ERROR - JSON decoding error for case study data: Invalid control character at: line 3 column 369 (char 444)
+2024-09-13 19:15:58,449 - __main__ - INFO - Received request to generate case study for place: India
+2024-09-13 19:15:58,449 - __main__ - INFO - Making request to News API with params: {'q': 'news in India', 'from': '2024-09-07', 'to': '2024-09-13', 'pageSize': 50, 'apiKey': '4f316b8b0cca48c0a71cdb75fe9729aa'}
+2024-09-13 19:15:59,297 - __main__ - INFO - Selected article: At least five killed as ethnic violence flares in India’s Manipur
+2024-09-13 19:15:59,297 - __main__ - INFO - Loading news data from URL: https://www.aljazeera.com/news/2024/9/7/ethnic-violence-flares-in-indias-manipur
+2024-09-13 19:16:00,037 - __main__ - INFO - Retrieving relevant context from vector store
+2024-09-13 19:16:00,586 - __main__ - INFO - Generating case study content
+2024-09-13 19:16:05,338 - __main__ - ERROR - JSON decoding error for case study data: Invalid control character at: line 3 column 418 (char 507)
+2024-09-13 19:16:07,318 - __main__ - INFO - Received request to generate case study for place: India
+2024-09-13 19:16:07,319 - __main__ - INFO - Making request to News API with params: {'q': 'news in India', 'from': '2024-09-07', 'to': '2024-09-13', 'pageSize': 50, 'apiKey': '4f316b8b0cca48c0a71cdb75fe9729aa'}
+2024-09-13 19:16:07,899 - __main__ - INFO - Selected article: At least five killed as ethnic violence flares in India’s Manipur
+2024-09-13 19:16:07,899 - __main__ - INFO - Loading news data from URL: https://www.aljazeera.com/news/2024/9/7/ethnic-violence-flares-in-indias-manipur
+2024-09-13 19:16:08,644 - __main__ - INFO - Retrieving relevant context from vector store
+2024-09-13 19:16:09,128 - __main__ - INFO - Generating case study content
+2024-09-13 19:16:15,885 - __main__ - INFO - Retrieving relevant context for questions
+2024-09-13 19:16:16,452 - __main__ - INFO - Generating questions
+2024-09-13 19:16:48,352 - __main__ - INFO - Received request to generate case study for place: Noida
+2024-09-13 19:16:48,353 - __main__ - INFO - Making request to News API with params: {'q': 'news in Noida', 'from': '2024-09-07', 'to': '2024-09-13', 'pageSize': 50, 'apiKey': '4f316b8b0cca48c0a71cdb75fe9729aa'}
+2024-09-13 19:16:48,844 - __main__ - WARNING - No relevant articles found after filtering
+2024-09-13 19:16:50,745 - __main__ - INFO - Received request to generate case study for place: Noida
+2024-09-13 19:16:50,745 - __main__ - INFO - Making request to News API with params: {'q': 'news in Noida', 'from': '2024-09-07', 'to': '2024-09-13', 'pageSize': 50, 'apiKey': '4f316b8b0cca48c0a71cdb75fe9729aa'}
+2024-09-13 19:16:51,051 - __main__ - WARNING - No relevant articles found after filtering
+2024-09-13 19:16:54,982 - __main__ - INFO - Received request to generate case study for place: Gurugram
+2024-09-13 19:16:54,982 - __main__ - INFO - Making request to News API with params: {'q': 'news in Gurugram', 'from': '2024-09-07', 'to': '2024-09-13', 'pageSize': 50, 'apiKey': '4f316b8b0cca48c0a71cdb75fe9729aa'}
+2024-09-13 19:16:55,690 - __main__ - WARNING - No relevant articles found after filtering
+2024-09-13 19:17:21,811 - __main__ - INFO - Received request to generate case study for place: Kashmir
+2024-09-13 19:17:21,812 - __main__ - INFO - Making request to News API with params: {'q': 'news in Kashmir', 'from': '2024-09-07', 'to': '2024-09-13', 'pageSize': 50, 'apiKey': '4f316b8b0cca48c0a71cdb75fe9729aa'}
+2024-09-13 19:17:22,550 - __main__ - INFO - Selected article: J-K heading for historic elections under national flag, Constitution: Shah
+2024-09-13 19:17:22,550 - __main__ - INFO - Loading news data from URL: https://www.business-standard.com/elections/jammu-kashmir-elections/j-k-heading-for-historic-elections-under-national-flag-constitution-shah-124090700235_1.html
+2024-09-13 19:17:22,957 - __main__ - INFO - Retrieving relevant context from vector store
+2024-09-13 19:17:23,580 - __main__ - INFO - Generating case study content
+2024-09-13 19:17:27,464 - __main__ - INFO - Retrieving relevant context for questions
+2024-09-13 19:17:28,258 - __main__ - INFO - Generating questions
+2024-09-13 19:17:34,945 - __main__ - ERROR - JSON decoding error for questions data: Expecting ',' delimiter: line 36 column 5 (char 2639)
+2024-09-13 19:17:42,090 - __main__ - INFO - Received request to generate case study for place: Kashmir
+2024-09-13 19:17:42,090 - __main__ - INFO - Making request to News API with params: {'q': 'news in Kashmir', 'from': '2024-09-07', 'to': '2024-09-13', 'pageSize': 50, 'apiKey': '4f316b8b0cca48c0a71cdb75fe9729aa'}
+2024-09-13 19:17:42,523 - __main__ - INFO - Selected article: Wing commander booked for alleged rape; IAF says cooperating with police
+2024-09-13 19:17:42,523 - __main__ - INFO - Loading news data from URL: https://www.business-standard.com/india-news/wing-commander-booked-for-alleged-rape-iaf-says-cooperating-with-police-124091100007_1.html
+2024-09-13 19:17:42,653 - __main__ - INFO - Retrieving relevant context from vector store
+2024-09-13 19:17:43,065 - __main__ - INFO - Generating case study content
+2024-09-13 19:17:47,744 - __main__ - ERROR - JSON decoding error for case study data: Invalid control character at: line 3 column 574 (char 695)
+2024-09-13 19:17:50,932 - __main__ - INFO - Received request to generate case study for place: Kashmir
+2024-09-13 19:17:50,932 - __main__ - INFO - Making request to News API with params: {'q': 'news in Kashmir', 'from': '2024-09-07', 'to': '2024-09-13', 'pageSize': 50, 'apiKey': '4f316b8b0cca48c0a71cdb75fe9729aa'}
+2024-09-13 19:17:52,801 - __main__ - INFO - Selected article: J-K heading for historic elections under national flag, Constitution: Shah
+2024-09-13 19:17:52,801 - __main__ - INFO - Loading news data from URL: https://www.business-standard.com/elections/jammu-kashmir-elections/j-k-heading-for-historic-elections-under-national-flag-constitution-shah-124090700235_1.html
+2024-09-13 19:17:53,518 - __main__ - INFO - Retrieving relevant context from vector store
+2024-09-13 19:17:54,293 - __main__ - INFO - Generating case study content
+2024-09-13 19:17:58,803 - __main__ - INFO - Retrieving relevant context for questions
+2024-09-13 19:17:59,486 - __main__ - INFO - Generating questions
+2024-09-13 19:21:23,717 - __main__ - INFO - Successfully connected to MongoDB
+2024-09-13 19:21:23,718 - __main__ - INFO - Starting to load and process PDFs
+2024-09-13 19:22:28,201 - faiss.loader - INFO - Loading faiss with AVX2 support.
+2024-09-13 19:22:28,219 - faiss.loader - INFO - Successfully loaded faiss with AVX2 support.
+2024-09-13 19:22:28,364 - __main__ - INFO - Successfully loaded and processed PDFs
+2024-09-13 19:22:28,376 - __main__ - INFO - Starting the FastAPI application
+2024-09-13 19:22:32,436 - __main__ - INFO - Received request to generate case study for query: crimes in Pune
+2024-09-13 19:22:32,436 - __main__ - INFO - Making request to News API with params: {'q': 'crimes in Pune', 'from': '2024-09-03', 'to': '2024-09-13', 'pageSize': 50, 'apiKey': '4f316b8b0cca48c0a71cdb75fe9729aa'}
+2024-09-13 19:22:33,545 - __main__ - INFO - Selected article: It’s about effective law enforcement: Let’s recommit the country
+2024-09-13 19:22:33,545 - __main__ - INFO - Loading news data from URL: https://www.livemint.com/opinion/columns/its-about-effective-law-enforcement-let-s-recommit-the-country-prakash-singh-police-judiciary-11725775950956.html
+2024-09-13 19:22:37,358 - __main__ - INFO - Retrieving relevant context from vector store
+2024-09-13 19:22:37,828 - __main__ - INFO - Generating case study content
+2024-09-13 19:22:43,989 - __main__ - INFO - Retrieving relevant context for questions
+2024-09-13 19:22:44,413 - __main__ - INFO - Generating questions
+2024-09-13 19:29:47,603 - __main__ - INFO - Received request to generate case study for query: crimes in delhi
+2024-09-13 19:29:47,603 - __main__ - INFO - Making request to News API with params: {'q': 'crimes in delhi', 'from': '2024-09-03', 'to': '2024-09-13', 'pageSize': 50, 'apiKey': '4f316b8b0cca48c0a71cdb75fe9729aa'}
+2024-09-13 19:29:49,668 - __main__ - INFO - Selected article: PIL in Supreme Court seeks direction to Centre to halt export of arms, military equipments to Israel
+2024-09-13 19:29:49,669 - __main__ - INFO - Loading news data from URL: https://economictimes.indiatimes.com/news/india/pil-in-supreme-court-seeks-direction-to-centre-to-halt-export-of-arms-military-equipments-to-israel/articleshow/113053282.cms
+2024-09-13 19:29:50,580 - __main__ - INFO - Retrieving relevant context from vector store
+2024-09-13 19:29:52,348 - __main__ - INFO - Generating case study content
+2024-09-13 19:29:58,674 - __main__ - ERROR - JSON decoding error for case study data: Invalid control character at: line 3 column 390 (char 528)
+2024-09-13 19:30:06,295 - __main__ - INFO - Received request to generate case study for query: crimes in delhi
+2024-09-13 19:30:06,295 - __main__ - INFO - Making request to News API with params: {'q': 'crimes in delhi', 'from': '2024-09-03', 'to': '2024-09-13', 'pageSize': 50, 'apiKey': '4f316b8b0cca48c0a71cdb75fe9729aa'}
+2024-09-13 19:30:07,993 - __main__ - INFO - Selected article: HM Amit Shah urges security agencies to use AI for checking cybercrimes
+2024-09-13 19:30:07,993 - __main__ - INFO - Loading news data from URL: https://www.business-standard.com/india-news/hm-amit-shah-urges-security-agencies-to-use-ai-for-checking-cybercrimes-124091000908_1.html
+2024-09-13 19:30:08,509 - __main__ - INFO - Retrieving relevant context from vector store
+2024-09-13 19:30:09,221 - __main__ - INFO - Generating case study content
+2024-09-13 19:30:13,245 - __main__ - ERROR - JSON decoding error for case study data: Invalid control character at: line 3 column 424 (char 522)
+2024-09-13 19:30:14,876 - __main__ - INFO - Received request to generate case study for query: crimes in delhi
+2024-09-13 19:30:14,876 - __main__ - INFO - Making request to News API with params: {'q': 'crimes in delhi', 'from': '2024-09-03', 'to': '2024-09-13', 'pageSize': 50, 'apiKey': '4f316b8b0cca48c0a71cdb75fe9729aa'}
+2024-09-13 19:30:15,355 - __main__ - INFO - Selected article: Fact-check: Trump's debate claims on crime, immigration, and Project 2025
+2024-09-13 19:30:15,355 - __main__ - INFO - Loading news data from URL: https://www.business-standard.com/world-news/fact-check-trump-s-debate-claims-on-crime-immigration-and-project-2025-124091100258_1.html
+2024-09-13 19:30:15,683 - __main__ - INFO - Retrieving relevant context from vector store
+2024-09-13 19:30:16,121 - __main__ - INFO - Generating case study content
+2024-09-13 19:30:20,606 - __main__ - ERROR - JSON decoding error for case study data: Invalid control character at: line 3 column 3519 (char 3613)
+2024-09-13 19:30:24,674 - __main__ - INFO - Received request to generate case study for query: crimes in delhi
+2024-09-13 19:30:24,674 - __main__ - INFO - Making request to News API with params: {'q': 'crimes in delhi', 'from': '2024-09-03', 'to': '2024-09-13', 'pageSize': 50, 'apiKey': '4f316b8b0cca48c0a71cdb75fe9729aa'}
+2024-09-13 19:30:25,406 - __main__ - INFO - Selected article: Women in police: Bihar leads, Bengal one of the lowest among large states
+2024-09-13 19:30:25,407 - __main__ - INFO - Loading news data from URL: https://www.business-standard.com/economy/analysis/women-in-police-bihar-leads-bengal-one-of-the-lowest-among-large-states-124090900800_1.html
+2024-09-13 19:30:25,814 - __main__ - INFO - Retrieving relevant context from vector store
+2024-09-13 19:30:26,306 - __main__ - INFO - Generating case study content
+2024-09-13 19:30:30,472 - __main__ - ERROR - JSON decoding error for case study data: Invalid control character at: line 3 column 438 (char 521)
+2024-09-13 19:30:36,878 - __main__ - INFO - Received request to generate case study for query: crimes in delhi
+2024-09-13 19:30:36,878 - __main__ - INFO - Making request to News API with params: {'q': 'crimes in delhi', 'from': '2024-09-03', 'to': '2024-09-13', 'pageSize': 50, 'apiKey': '4f316b8b0cca48c0a71cdb75fe9729aa'}
+2024-09-13 19:30:38,405 - __main__ - INFO - Selected article: Bengal to table Bill for death penalty in rape cases today: Details here
+2024-09-13 19:30:38,405 - __main__ - INFO - Loading news data from URL: https://www.business-standard.com/india-news/bengal-to-table-bill-for-death-penalty-in-rape-cases-today-details-here-124090300360_1.html
+2024-09-13 19:30:38,600 - __main__ - INFO - Retrieving relevant context from vector store
+2024-09-13 19:30:39,327 - __main__ - INFO - Generating case study content
+2024-09-13 19:30:43,965 - __main__ - ERROR - JSON decoding error for case study data: Invalid control character at: line 3 column 382 (char 463)
+2024-09-13 19:30:45,357 - __main__ - INFO - Received request to generate case study for query: crimes in delhi
+2024-09-13 19:30:45,358 - __main__ - INFO - Making request to News API with params: {'q': 'crimes in delhi', 'from': '2024-09-03', 'to': '2024-09-13', 'pageSize': 50, 'apiKey': '4f316b8b0cca48c0a71cdb75fe9729aa'}
+2024-09-13 19:30:45,661 - __main__ - INFO - Selected article: Nuclear Civilization for Peace Science in a Harmonious Multipolar Future. “Scientific Truth and Renewal of International Law are Essential”
+2024-09-13 19:30:45,661 - __main__ - INFO - Loading news data from URL: https://www.globalresearch.ca/nuclear-civilization-peace-science-harmonious-multipolar-future/5866991
+2024-09-13 19:30:47,691 - __main__ - INFO - Retrieving relevant context from vector store
+2024-09-13 19:30:48,490 - __main__ - INFO - Generating case study content
+2024-09-13 19:30:53,361 - __main__ - ERROR - JSON decoding error for case study data: Invalid control character at: line 3 column 404 (char 514)
+2024-09-13 19:30:54,759 - __main__ - INFO - Received request to generate case study for query: crimes in delhi
+2024-09-13 19:30:54,759 - __main__ - INFO - Making request to News API with params: {'q': 'crimes in delhi', 'from': '2024-09-03', 'to': '2024-09-13', 'pageSize': 50, 'apiKey': '4f316b8b0cca48c0a71cdb75fe9729aa'}
+2024-09-13 19:30:55,087 - __main__ - INFO - Selected article: Bengal to table Bill for death penalty in rape cases today: Details here
+2024-09-13 19:30:55,087 - __main__ - INFO - Loading news data from URL: https://www.business-standard.com/india-news/bengal-to-table-bill-for-death-penalty-in-rape-cases-today-details-here-124090300360_1.html
+2024-09-13 19:30:55,579 - __main__ - INFO - Retrieving relevant context from vector store
+2024-09-13 19:30:56,126 - __main__ - INFO - Generating case study content
+2024-09-13 19:31:00,500 - __main__ - INFO - Retrieving relevant context for questions
+2024-09-13 19:31:00,946 - __main__ - INFO - Generating questions
