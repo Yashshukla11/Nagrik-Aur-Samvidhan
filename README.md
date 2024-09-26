@@ -23,7 +23,7 @@ Welcome to Nagrik Aur Samvidhan! "संविधान केवल कान�
 - [A Descriptive Video](#a-descriptive-video)
 - [How to Access Our Platform](#how-to-access-our-platform)
 - [Future Enhancements](#future-enhancements)
-  
+
 ---
 
 ## 📜 About the Project 
@@ -145,6 +145,8 @@ We are constantly striving to improve **Nagrik Aur Samvidhan**. Here are some ex
 *   **🎮 More Games & Challenges:** Adding more formats like crosswords and trivia to make learning fun and engaging!
 
 We are committed to making your journey towards understanding the Constitution both enriching and enjoyable! 🌟
+
+**Website**: [Website](https://sih-2024-zeta.vercel.app/)
 
 ---
 
