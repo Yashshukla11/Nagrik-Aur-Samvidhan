@@ -1,0 +1,18 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+.swiper-button-next,
+.swiper-button-prev {
+  color: #F59E0B;
+}
+.swiper-button-next:hover,
+.swiper-button-prev:hover {
+  color: #15803D;
+}
+.swiper-pagination-bullet-active {
+    opacity: 1;
+}
+.swiper-pagination-bullet-active {
+    background-color: #F59E0B;
+}
