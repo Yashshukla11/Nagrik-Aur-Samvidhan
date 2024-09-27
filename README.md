@@ -146,7 +146,6 @@ We are constantly striving to improve **Nagrik Aur Samvidhan**. Here are some ex
 
 We are committed to making your journey towards understanding the Constitution both enriching and enjoyable! 🌟
 
-**Website**: [Website](https://sih-2024-zeta.vercel.app/)
 
 ---
 
