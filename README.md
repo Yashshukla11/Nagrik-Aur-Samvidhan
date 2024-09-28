@@ -6,6 +6,10 @@ Click the button below to download the latest APK of the Nagrik Aur Samvidhan ap
 [![Download APK](https://img.shields.io/badge/Download-APK-blue)](https://drive.google.com/file/d/1BzmYm6rd_YCcCB9w5nmq9VruTH67nCcv/view?usp=sharing)
 
 
+To log in and test the application, use the following credentials:
+
+- **Username/Email**: `demo@demo.com`
+- **Password**: `demo`
 
 
 
