@@ -1,7 +1,7 @@
 
 ## Download
 
-Click the button below to download the latest APK of the Campus Haat app.
+Click the button below to download the latest APK of the Nagrik Aur Samvidhan app.
 
 [![Download APK](https://img.shields.io/badge/Download-APK-blue)](https://drive.google.com/file/d/1BzmYm6rd_YCcCB9w5nmq9VruTH67nCcv/view?usp=sharing)
 
