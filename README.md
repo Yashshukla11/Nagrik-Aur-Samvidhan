@@ -17,6 +17,8 @@ Welcome to Nagrik Aur Samvidhan! "संविधान केवल कान�
 ## 🔗 Table of Contents
 
 - [About the Project](#about-the-project)
+- [Quick Start](#quick-start)
+- [Documentation](#documentation)
 - [Our Vision](#our-vision)
 - [Current Challenges](#current-challenges)
 - [How it Addresses the Problem](#how-it-addresses-the-problem)
@@ -25,12 +27,67 @@ Welcome to Nagrik Aur Samvidhan! "संविधान केवल कान�
 - [A Descriptive Video](#a-descriptive-video)
 - [How to Access Our Platform](#how-to-access-our-platform)
 - [Future Enhancements](#future-enhancements)
+- [Contributing](#contributing)
 
 ---
 
 ## 📜 About the Project 
 
 'Nagrik Aur Samvidhan' is a digital platform developed as part of the **Smart India Hackathon** to increase **constitutional literacy** among citizens. It simplifies the Indian Constitution's complex language, making it accessible for all users, from students to everyday citizens.
+
+---
+
+## 🚀 Quick Start
+
+### For Users
+1. **Download the Mobile App** from the Play Store or App Store
+2. **Visit the Web Platform** at [our website](#)
+3. **Create an Account** and start your constitutional learning journey!
+
+### For Developers
+1. **Read the Documentation**: Start with [PROJECT_STRUCTURE.md](PROJECT_STRUCTURE.md) to understand the architecture
+2. **Setup Your Environment**: Follow [SETUP_GUIDE.md](SETUP_GUIDE.md) for detailed setup instructions
+3. **Start Developing**: Check [DEVELOPER_GUIDE.md](DEVELOPER_GUIDE.md) for coding guidelines
+4. **Explore the API**: Review [API_DOCUMENTATION.md](API_DOCUMENTATION.md) for API details
+
+### Quick Setup (TL;DR)
+```bash
+# Clone the repository
+git clone https://github.com/Yashshukla11/Nagrik-Aur-Samvidhan.git
+cd Nagrik-Aur-Samvidhan
+
+# Backend Setup
+cd NagrikAurSamvidhan-Backend/Backend
+npm install
+# Configure .env file
+npm run dev
+
+# Web App Setup
+cd ../../NagrikAurSamvidhan-Web
+npm install
+# Configure .env file
+npm run dev
+
+# Mobile App Setup
+cd ../NagrikAurSamvidhan-App
+flutter pub get
+flutter run
+```
+
+For detailed setup instructions including AI services, see [SETUP_GUIDE.md](SETUP_GUIDE.md).
+
+---
+
+## 📚 Documentation
+
+Comprehensive documentation is available to help you understand and contribute to the project:
+
+| Document | Description |
+|----------|-------------|
+| [PROJECT_STRUCTURE.md](PROJECT_STRUCTURE.md) | Complete overview of project architecture, components, and data flow |
+| [SETUP_GUIDE.md](SETUP_GUIDE.md) | Step-by-step setup instructions for all components |
+| [DEVELOPER_GUIDE.md](DEVELOPER_GUIDE.md) | Development guidelines, coding standards, and best practices |
+| [API_DOCUMENTATION.md](API_DOCUMENTATION.md) | Comprehensive API reference for backend and AI services |
 
 ---
 
@@ -148,6 +205,73 @@ We are constantly striving to improve **Nagrik Aur Samvidhan**. Here are some ex
 
 We are committed to making your journey towards understanding the Constitution both enriching and enjoyable! 🌟
 
+---
+
+## 🤝 Contributing
+
+We welcome contributions from the community! Here's how you can help:
+
+### For Developers
+1. **Fork the Repository**
+2. **Read the Documentation**: 
+   - [PROJECT_STRUCTURE.md](PROJECT_STRUCTURE.md) - Understand the architecture
+   - [SETUP_GUIDE.md](SETUP_GUIDE.md) - Set up your development environment
+   - [DEVELOPER_GUIDE.md](DEVELOPER_GUIDE.md) - Follow coding guidelines
+3. **Create a Feature Branch**: `git checkout -b feature/your-feature-name`
+4. **Make Your Changes**: Follow the coding standards in the Developer Guide
+5. **Test Your Changes**: Ensure all tests pass
+6. **Commit Your Changes**: `git commit -m 'feat: add some feature'`
+7. **Push to the Branch**: `git push origin feature/your-feature-name`
+8. **Open a Pull Request**: Describe your changes in detail
+
+### For Non-Developers
+- **Report Bugs**: Create an issue describing the problem
+- **Suggest Features**: Share your ideas for new features
+- **Improve Documentation**: Help us make the docs better
+- **Share Feedback**: Tell us about your experience using the platform
+
+### Contribution Guidelines
+- Follow the code style guidelines in [DEVELOPER_GUIDE.md](DEVELOPER_GUIDE.md)
+- Write clear, meaningful commit messages
+- Add tests for new features
+- Update documentation when needed
+- Be respectful and constructive in discussions
+
+### Areas Where We Need Help
+- 🐛 **Bug Fixes**: Help us squash bugs
+- 📝 **Documentation**: Improve or translate documentation
+- 🎨 **UI/UX**: Enhance user experience
+- 🧪 **Testing**: Write and improve tests
+- 🌐 **Translations**: Add support for more regional languages
+- ♿ **Accessibility**: Make the platform more accessible
+
+---
+
+## 📄 License
+
+This project is developed for the **Smart India Hackathon 2024**.
+
+---
+
+## 📞 Contact & Support
+
+- **GitHub Issues**: For bug reports and feature requests
+- **Email**: [Contact the team]
+- **Documentation**: Check our comprehensive docs for answers
+
+For detailed technical questions, please refer to:
+- [API_DOCUMENTATION.md](API_DOCUMENTATION.md) - For API-related queries
+- [DEVELOPER_GUIDE.md](DEVELOPER_GUIDE.md) - For development questions
+- [SETUP_GUIDE.md](SETUP_GUIDE.md) - For setup issues
+
+---
+
+## 🙏 Acknowledgments
+
+- **Smart India Hackathon** for the opportunity
+- **Indian Constitution** for being our guiding light
+- All **contributors** who help make this project better
+- The **open-source community** for the amazing tools and libraries
 
 ---
 
