@@ -24,63 +24,81 @@ class LoginScreen extends StatelessWidget {
           ),
           // Scrollable Content
           SafeArea(
-            child: SingleChildScrollView(
-              child: ConstrainedBox(
-                constraints: BoxConstraints(
-                  minHeight: MediaQuery.of(context).size.height -
-                      MediaQuery.of(context).padding.top -
-                      MediaQuery.of(context).padding.bottom,
-                ),
-                child: IntrinsicHeight(
-                  child: Column(
-                    children: [
-                      LogoWidget(),
-
-                      Expanded(
-                        child: Padding(
-                          padding: const EdgeInsets.symmetric(
-                              horizontal: 16.0, vertical: 4),
-                          child: Container(
-                            decoration: BoxDecoration(
-                              gradient: LinearGradient(
-                                colors: [Color(0xFFB29F94), Color(0xFF603813)],
-                                begin: Alignment.topRight,
-                                end: Alignment.bottomLeft,
+            child: LayoutBuilder(
+              builder: (context, constraints) {
+                return SingleChildScrollView(
+                  child: ConstrainedBox(
+                    constraints: BoxConstraints(
+                      minHeight: constraints.maxHeight,
+                    ),
+                    child: Column(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                        Column(
+                          mainAxisSize: MainAxisSize.min,
+                          children: [
+                            SizedBox(height: 20),
+                            LogoWidget(),
+                            SizedBox(height: 30),
+                            // Compact login form container
+                            Padding(
+                              padding: const EdgeInsets.symmetric(horizontal: 24.0),
+                              child: Container(
+                                constraints: BoxConstraints(maxWidth: 400),
+                                decoration: BoxDecoration(
+                                  gradient: LinearGradient(
+                                    colors: [Color(0xFFB29F94), Color(0xFF603813)],
+                                    begin: Alignment.topRight,
+                                    end: Alignment.bottomLeft,
+                                  ),
+                                  borderRadius: BorderRadius.circular(20),
+                                  boxShadow: [
+                                    BoxShadow(
+                                      color: Colors.black.withOpacity(0.2),
+                                      blurRadius: 15,
+                                      offset: Offset(0, 5),
+                                    ),
+                                  ],
+                                ),
+                                child: Padding(
+                                  padding: const EdgeInsets.symmetric(
+                                    horizontal: 24.0,
+                                    vertical: 32.0,
+                                  ),
+                                  child: Column(
+                                    mainAxisSize: MainAxisSize.min,
+                                    crossAxisAlignment: CrossAxisAlignment.stretch,
+                                    children: [
+                                      EmailTextField(controller: controller),
+                                      const SizedBox(height: 20),
+                                      PasswordTextField(controller: controller),
+                                      const SizedBox(height: 28),
+                                      LoginButton(controller: controller),
+                                      const SizedBox(height: 20),
+                                      SignupText(),
+                                    ],
+                                  ),
+                                ),
                               ),
-                              borderRadius: BorderRadius.circular(10),
                             ),
-                            child: Padding(
-                              padding: const EdgeInsets.all(16.0),
-                              child: Column(
-                                mainAxisAlignment: MainAxisAlignment.center,
-                                crossAxisAlignment: CrossAxisAlignment.center,
-                                children: [
-                                  SizedBox(height: 24),
-                                  EmailTextField(controller: controller),
-                                  const SizedBox(height: 16),
-                                  PasswordTextField(controller: controller),
-                                  const SizedBox(height: 24),
-                                  LoginButton(controller: controller),
-                                  const SizedBox(height: 24),
-                                  SignupText(),
-                                ],
-                              ),
+                          ],
+                        ),
+                        // Bottom Image (fixed position)
+                        Padding(
+                          padding: const EdgeInsets.only(bottom: 10),
+                          child: SizedBox(
+                            height: 100,
+                            child: Image.asset(
+                              'assets/auth/login1.png',
+                              fit: BoxFit.contain,
                             ),
                           ),
                         ),
-                      ),
-                      // Bottom Image (fixed position)
-                      SizedBox(
-                        height: 100,
-                        child: Image.asset(
-                          'assets/auth/login1.png',
-                          fit: BoxFit.contain,
-                        ),
-                      ),
-                    ],
+                      ],
+                    ),
                   ),
-                ),
-              ),
+                );
+              },
             ),
           ),
         ],
@@ -95,19 +113,19 @@ class LogoWidget extends StatelessWidget {
     return Container(
       decoration: BoxDecoration(
         borderRadius: BorderRadius.circular(100),
-        boxShadow: const [
-          // BoxShadow(
-          //   color: Colors.white,
-          //   blurRadius: 50.0,
-          //   spreadRadius: 0.0,
-          //   offset: Offset(0, 5),
-          // ),
+        boxShadow: [
+          BoxShadow(
+            color: Colors.black.withOpacity(0.1),
+            blurRadius: 20,
+            spreadRadius: 2,
+            offset: Offset(0, 5),
+          ),
         ],
       ),
       child: Image.asset(
         'assets/auth/logo.png',
-        height: Sizes.HEIGHT_200,
-        width: Sizes.WIDTH_200,
+        height: 120,
+        width: 120,
         fit: BoxFit.cover,
       ),
     );
@@ -122,18 +140,27 @@ class EmailTextField extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return TextField(
-      decoration: const InputDecoration(
-        border: OutlineInputBorder(),
+      decoration: InputDecoration(
+        border: OutlineInputBorder(
+          borderRadius: BorderRadius.circular(12),
+          borderSide: BorderSide(color: Colors.grey.shade300),
+        ),
+        enabledBorder: OutlineInputBorder(
+          borderRadius: BorderRadius.circular(12),
+          borderSide: BorderSide(color: Colors.grey.shade300),
+        ),
         filled: true,
         hintText: 'Email',
         fillColor: Colors.white,
-        hoverColor: MyColor.black,
+        contentPadding: EdgeInsets.symmetric(horizontal: 16, vertical: 16),
         focusedBorder: OutlineInputBorder(
-          borderSide: BorderSide(color: Colors.black),
+          borderRadius: BorderRadius.circular(12),
+          borderSide: BorderSide(color: MyColor.darkBlue, width: 2),
         ),
       ),
-      style: const TextStyle(color: Colors.black, fontWeight: FontWeight.w600),
-      cursorColor: Colors.black,
+      style: const TextStyle(color: Colors.black, fontWeight: FontWeight.w500),
+      cursorColor: MyColor.darkBlue,
+      keyboardType: TextInputType.emailAddress,
       onChanged: controller.setEmail,
     );
   }
@@ -148,17 +175,26 @@ class PasswordTextField extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return TextField(
-      decoration: const InputDecoration(
+      decoration: InputDecoration(
         hintText: 'Password',
-        border: OutlineInputBorder(),
+        border: OutlineInputBorder(
+          borderRadius: BorderRadius.circular(12),
+          borderSide: BorderSide(color: Colors.grey.shade300),
+        ),
+        enabledBorder: OutlineInputBorder(
+          borderRadius: BorderRadius.circular(12),
+          borderSide: BorderSide(color: Colors.grey.shade300),
+        ),
         filled: true,
-        fillColor: MyColor.white,
+        fillColor: Colors.white,
+        contentPadding: EdgeInsets.symmetric(horizontal: 16, vertical: 16),
         focusedBorder: OutlineInputBorder(
-          borderSide: BorderSide(color: Colors.black),
+          borderRadius: BorderRadius.circular(12),
+          borderSide: BorderSide(color: MyColor.darkBlue, width: 2),
         ),
       ),
-      style: TextStyle(color: MyColor.black),
-      cursorColor: Colors.black,
+      style: TextStyle(color: MyColor.black, fontWeight: FontWeight.w500),
+      cursorColor: MyColor.darkBlue,
       obscureText: true,
       onChanged: controller.setPassword,
     );
@@ -174,25 +210,39 @@ class LoginButton extends StatelessWidget {
   Widget build(BuildContext context) {
     return Obx(() => GestureDetector(
           onTap: controller.isLoading.value ? null : controller.login,
-          // onTap: () async {
-          //   // bool success = await controller.login();
-          //   // if (success) {
-          //   Get.to(() => HomeScreen());
-          //   // }
-          // },
           child: Container(
-            padding: const EdgeInsets.symmetric(horizontal: 30, vertical: 15),
+            padding: const EdgeInsets.symmetric(horizontal: 30, vertical: 16),
             decoration: BoxDecoration(
               color:
                   controller.isLoading.value ? Colors.grey : MyColor.darkBlue,
-              borderRadius: BorderRadius.circular(10),
+              borderRadius: BorderRadius.circular(12),
+              boxShadow: [
+                BoxShadow(
+                  color: MyColor.darkBlue.withOpacity(0.3),
+                  blurRadius: 8,
+                  offset: Offset(0, 4),
+                ),
+              ],
             ),
-            child: const Text(
-              'Login',
-              style: TextStyle(
-                fontSize: 18,
-                color: Colors.white,
-              ),
+            child: Center(
+              child: controller.isLoading.value
+                  ? SizedBox(
+                      height: 20,
+                      width: 20,
+                      child: CircularProgressIndicator(
+                        strokeWidth: 2,
+                        valueColor: AlwaysStoppedAnimation<Color>(Colors.white),
+                      ),
+                    )
+                  : const Text(
+                      'Login',
+                      style: TextStyle(
+                        fontSize: 18,
+                        color: Colors.white,
+                        fontWeight: FontWeight.w600,
+                        letterSpacing: 0.5,
+                      ),
+                    ),
             ),
           ),
         ));
@@ -205,13 +255,22 @@ class SignupText extends StatelessWidget {
     return GestureDetector(
       onTap: () => Get.to(() => SignupScreen()),
       child: RichText(
+        textAlign: TextAlign.center,
         text: TextSpan(
           text: "Don't have an account? ",
-          style: TextStyle(color: Colors.white),
+          style: TextStyle(
+            color: Colors.white,
+            fontSize: 15,
+            fontWeight: FontWeight.w400,
+          ),
           children: <TextSpan>[
             TextSpan(
               text: 'Sign Up',
-              style: TextStyle(color: MyColor.darkBlue),
+              style: TextStyle(
+                color: Colors.white,
+                fontWeight: FontWeight.bold,
+                decoration: TextDecoration.underline,
+              ),
             ),
           ],
         ),
